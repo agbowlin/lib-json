@@ -5,6 +5,7 @@
 ## TODO
 
 - Handle comments in json.
+- Combine with hiernodejs to provide node navigation?
 
 
 ### General
@@ -15,11 +16,13 @@
 
 ### JsonFormatter
 
+- Processing time for `stringify` is VERY slow
 - stringify: Implement hierarchy lines
 
 
 ### JsonScanner
 
+- Processing time for `parse` is slow
 - calculate_transform: Handle order in arrays
 - apply_transform: Implement
 
