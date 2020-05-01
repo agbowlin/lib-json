@@ -1,0 +1,23 @@
+{
+	"one": 1,
+	"two": 2,
+	"three": [
+		"three-1",
+		"three-2",
+		"three-3"
+	],
+	"four": {
+		"four_1": 4.1,
+		"four_2": 4.2,
+		"four_3": 4.3
+	},
+	"five": {
+		"six": {
+			"seven": 7,
+			"eight": 8,
+			"nine": 9
+		}
+	},
+	"none": null,
+	"done": true
+}

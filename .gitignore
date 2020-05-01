@@ -1,0 +1,17 @@
+~*
+*~
+
+*.log
+*.out
+*.pid
+
+node_modules
+npm-debug.log
+.node_history
+
+.c9
+# .vscode
+.idea
+.DS_STORE
+.netbeans
+nbproject
