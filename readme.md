@@ -17,7 +17,14 @@
 ### JsonFormatter
 
 - Processing time for `stringify` is VERY slow
-- stringify: Implement hierarchy lines
+- [BUG:2020-05-01] `stringify` has some newline issues when dealing with nested objects and arrays.
+- `stringify`: Implement hierarchy lines
+- `stringify`: Implement Options:
+	- `always_quote_identifiers`: Force quoting of field (identifier) names.
+	- `extroverted_arrays`: Array brackets on own line.
+	- `extroverted_brackets`: Brackets on own line.
+	- `extroverted_braces`: Braces on own line.
+- Implement another set of options beyond very pretty: `STRINGIFY_OPTIONS_EXPRESSIVE`
 
 
 ### JsonScanner

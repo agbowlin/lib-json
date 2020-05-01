@@ -56,7 +56,7 @@ class JsonFormatter
 	{
 
 		//---------------------------------------------------------------------
-		function stringify_recurse ( Node, Depth, Options )
+		function stringify_recurse ( Node, Depth, Options, Context = null )
 		{
 			let json = '';
 
@@ -98,14 +98,17 @@ class JsonFormatter
 				}
 				else if ( Array.isArray( Node ) )
 				{
-					json += Options.eol_char;
+					// if ( Depth > 0 )
+					{
+						json += Options.eol_char;
+					}
 					json += Options.tab_char.repeat( Depth );
 					json += '[';
 					json += Options.eol_char;
 					for ( let index = 0; index < Node.length; index++ )
 					{
 						json += Options.tab_char.repeat( Depth + 1 );
-						json += stringify_recurse( Node[ index ], Depth + 1, Options );
+						json += stringify_recurse( Node[ index ], Depth + 1, Options, 'array-element' );
 						if ( ( index < ( Node.length - 1 ) ) || Options.liberal_commas )
 						{
 							json += ',';
@@ -117,8 +120,11 @@ class JsonFormatter
 				}
 				else
 				{
-					json += Options.eol_char;
-					json += Options.tab_char.repeat( Depth );
+					if ( Context === 'field-value' )
+					{
+						json += Options.eol_char;
+						json += Options.tab_char.repeat( Depth );
+					}
 					json += '{';
 					json += Options.eol_char;
 					let keys = Object.keys( Node );
@@ -136,7 +142,7 @@ class JsonFormatter
 							json += ' '.repeat( max_key_length - key.length );
 						}
 						json += Options.space_char;
-						json += stringify_recurse( Node[ key ], Depth + 1, Options );
+						json += stringify_recurse( Node[ key ], Depth + 1, Options, 'field-value' );
 						if ( ( index < ( keys.length - 1 ) ) || Options.liberal_commas )
 						{
 							json += ',';
