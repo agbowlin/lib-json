@@ -29,9 +29,24 @@
 			"program": "${workspaceFolder}/node_modules/.bin/webpack-cli",
 			"args": [
 				"--file",
-				"webpack.config.json"
+				"webpack.config.js"
 			],
-			"cwd": "${workspaceFolder}/build",
+			"cwd": "${workspaceFolder}",
+			"internalConsoleOptions": "openOnSessionStart",
+			"skipFiles": [
+				"<node_internals>/**"
+			]
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Build Docs",
+			"program": "${workspaceFolder}/node_modules/.bin/jsdoc",
+			"args": [
+				"-c",
+				"jsdoc.config.js"
+			],
+			"cwd": "${workspaceFolder}",
 			"internalConsoleOptions": "openOnSessionStart",
 			"skipFiles": [
 				"<node_internals>/**"
