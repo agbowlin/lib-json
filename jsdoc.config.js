@@ -29,8 +29,8 @@ module.exports =
 	},
 	opts:
 	{
-		template: "templates/default",
-		// template: "node_modules/docdash/",
+		// template: "templates/default",
+		template: "node_modules/docdash/",
 		encoding: "utf8",
 		destination: "./docs/",
 		// recurse: true,

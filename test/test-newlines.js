@@ -21,5 +21,5 @@ const LIB_JSON = require( '../lib-json.js' );
 	};
 	// console.log( LIB_JSON.stringify( data1, LIB_JSON.STRINGIFY_OPTIONS_VERYPRETTY ) );
 	// console.log( LIB_JSON.stringify( data2, LIB_JSON.STRINGIFY_OPTIONS_VERYPRETTY ) );
-	console.log( LIB_JSON.stringify( data3, LIB_JSON.STRINGIFY_OPTIONS_VERYPRETTY ) );
+	// console.log( LIB_JSON.stringify( data3, LIB_JSON.STRINGIFY_OPTIONS_VERYPRETTY ) );
 }

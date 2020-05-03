@@ -1,13 +1,13 @@
 {
   "name": "lib-json",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "JSON Utilities",
-  "main": "dist/lib-json.dist.js",
+  "main": "lib-json.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "build": "webpack --config build/webpack.config.js",
+    "build": "webpack --config webpack.config.js",
     "test": "mocha"
   },
   "author": "",

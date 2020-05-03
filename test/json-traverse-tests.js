@@ -14,7 +14,7 @@ let json = null;
 
 
 //---------------------------------------------------------------------
-describe( `JsonFinder`, function ()
+describe( `Json Traverse`, function ()
 {
 
 

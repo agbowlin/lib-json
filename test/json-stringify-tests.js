@@ -15,7 +15,7 @@ let json = null;
 
 
 //---------------------------------------------------------------------
-describe( `JsonFormatter`, function ()
+describe( `Json Stringify`, function ()
 {
 
 
