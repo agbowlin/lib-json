@@ -14,7 +14,7 @@
 - Convert to/from YAML
 
 
-### JsonFormatter
+### Stringify
 
 - Processing time for `stringify` is VERY slow
 - [BUG:2020-05-01] `stringify` has some newline issues when dealing with nested objects and arrays.
@@ -25,17 +25,12 @@
 	- `extroverted_brackets`: Brackets on own line.
 	- `extroverted_braces`: Braces on own line.
 - Implement another set of options beyond very pretty: `STRINGIFY_OPTIONS_EXPRESSIVE`
+- generate_model: Implement (from json2model.js)
 
 
-### JsonScanner
+### Parse
 
 - Processing time for `parse` is slow
 - calculate_transform: Handle order in arrays
 - apply_transform: Implement
-
-
-### JsonMetadata
-
-- generate_model: Implement (from json2model.js)
-
 
