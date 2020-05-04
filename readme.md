@@ -4,14 +4,14 @@
 
 ## TODO
 
-- Handle comments in json.
-- Combine with hiernodejs to provide node navigation?
-
-
 ### General
 
 - Export top level functions in PascalCase.
 - Rewrite classes as simple functions to maintain compatibility with earlier platforms.
+- Handle comments in json.
+- Combine with hiernodejs to provide node navigation?
+- Convert to/from BSON
+- Convert to/from YAML
 
 
 ### JsonFormatter
