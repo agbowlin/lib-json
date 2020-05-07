@@ -11,17 +11,22 @@ exports.tablify = tablify;
 
 
 //---------------------------------------------------------------------
-function tablify( Node, Options = {} )
+function tablify ( Node, Options = {} )
 {
 
 	//---------------------------------------------------------------------
-	function tablify_recurse( Node, Depth, Options, Context = null ) 
+	function tablify_recurse ( Node, Depth, Options, Context = null ) 
 	{
 		let text = '';
+		let stringify_options = LIB_STRINGIFY.STRINGIFY_OPTIONS_MINIMAL;
+		stringify_options.identifier_quote = '';
+		stringify_options.always_quote_identifiers = false;
+		stringify_options.literal_quote = '';
+		stringify_options.space_char = ' ';
 
 		if ( Depth > Options.max_tablify_depth )
 		{
-			return LIB_STRINGIFY.stringify( Node );
+			return LIB_STRINGIFY.stringify( Node, stringify_options );
 		}
 
 		if ( typeof Node === 'undefined' )
@@ -64,11 +69,81 @@ function tablify( Node, Options = {} )
 				{
 					text += Options.eol_char;
 				}
-				for ( let index = 0; index < Node.length; index++ )
+				if ( Node.length === 0 )
 				{
-					text += Options.tab_char.repeat( Depth + 1 );
-					text += tablify_recurse( Node[ index ], Depth + 1, Options, 'array-element' );
-					if ( index < ( Node.length - 1 ) ) { text += Options.eol_char; }
+					return '';
+				}
+				if (
+					( typeof Node[ 0 ] === 'object' )
+					&& ( Node[ 0 ] !== null )
+				)
+				{
+					if ( Array.isArray( Node[ 0 ] ) )
+					{
+						// Table of arrays.
+						for ( let index = 0; index < Node.length; index++ )
+						{
+							text += Options.tab_char.repeat( Depth );
+							text += LIB_STRINGIFY.stringify( Node[ index ], stringify_options );
+							if ( index < ( Node.length - 1 ) ) { text += Options.eol_char; }
+						}
+					}
+					else
+					{
+						// Table of objects.
+						// Get column widths.
+						let keys = Object.keys( Node[ 0 ] );
+						let col_widths = keys.map( key => key.length );
+						for ( let index = 0; index < Node.length; index++ )
+						{
+							for ( let col_index = 0; col_index < keys.length; col_index++ )
+							{
+								let value = LIB_STRINGIFY.stringify( Node[ index ][ keys[ col_index ] ], stringify_options );
+								if ( col_widths[ col_index ] < value.length ) { col_widths[ col_index ] = value.length; }
+							}
+						}
+						// Display column headers.
+						text += Options.tab_char.repeat( Depth );
+						for ( let col_index = 0; col_index < keys.length; col_index++ )
+						{
+							if ( col_index > 0 ) { text += ' | '; }
+							let value = keys[ col_index ];
+							text += value;
+							text += ''.padEnd( col_widths[ col_index ] - value.length );
+						}
+						text += Options.eol_char;
+						// Display column header line.
+						text += Options.tab_char.repeat( Depth );
+						for ( let col_index = 0; col_index < keys.length; col_index++ )
+						{
+							if ( col_index > 0 ) { text += '-+-'; }
+							text += '-'.repeat( col_widths[ col_index ] );
+						}
+						text += Options.eol_char;
+						// Display values.
+						for ( let index = 0; index < Node.length; index++ )
+						{
+							text += Options.tab_char.repeat( Depth );
+							for ( let col_index = 0; col_index < keys.length; col_index++ )
+							{
+								if ( col_index > 0 ) { text += ' | '; }
+								let value = LIB_STRINGIFY.stringify( Node[ index ][ keys[ col_index ] ], stringify_options );
+								text += value;
+								text += ''.padEnd( col_widths[ col_index ] - value.length );
+							}
+							if ( index < ( Node.length - 1 ) ) { text += Options.eol_char; }
+						}
+					}
+				}
+				else
+				{
+					// Table of primiive values.
+					for ( let index = 0; index < Node.length; index++ )
+					{
+						text += Options.tab_char.repeat( Depth );
+						text += tablify_recurse( Node[ index ], Depth + 1, Options, 'array-element' );
+						if ( index < ( Node.length - 1 ) ) { text += Options.eol_char; }
+					}
 				}
 			}
 			else
@@ -81,12 +156,13 @@ function tablify( Node, Options = {} )
 				let keys = Object.keys( Node );
 				// Get the max column width for the keys.
 				let max_key_length = 0;
-				keys.map( ( key ) => { if ( key.length > max_key_length ) { max_key_length = key.length; } } );
+				keys.forEach( ( key ) => { if ( key.length > max_key_length ) { max_key_length = key.length; } } );
+				// Display Values.
 				for ( let index = 0; index < keys.length; index++ )
 				{
 					let key = keys[ index ];
-					text += Options.tab_char.repeat( Depth + 1 );
-					text += `${key}${''.padEnd( max_key_length - key.length )} : `;
+					text += Options.tab_char.repeat( Depth );
+					text += `${ key }${ ''.padEnd( max_key_length - key.length ) } : `;
 					text += tablify_recurse( Node[ key ], Depth + 1, Options, 'field-value' );
 					if ( index < ( key.length - 1 ) ) { text += Options.eol_char; }
 				}
@@ -102,7 +178,7 @@ function tablify( Node, Options = {} )
 	Options.literal_quote = Options.literal_quote ? Options.literal_quote : `"`;
 	Options.eol_char = Options.eol_char ? Options.eol_char : `\n`;
 	Options.tab_char = Options.tab_char ? Options.tab_char : `    `;
-	Options.max_tablify_depth = Options.max_tablify_depth ? Options.max_tablify_depth : 1;
+	Options.max_tablify_depth = Options.max_tablify_depth ? Options.max_tablify_depth : 2;
 
 
 	//---------------------------------------------------------------------
@@ -115,6 +191,12 @@ let text = tablify(
 		"Report Name": 'My Super Technical Report',
 		"Timestamp": ( new Date() ).toString(),
 		"Author": 'Computer Algorithm',
+		"Raw Data": [ 0.95, 0.83, 0.87 ],
+		"More Raw Data":
+			[
+				[ 1, 2, 3 ],
+				[ 0.95, 0.83, 0.87 ],
+			],
 		"Results":
 			[
 				{
@@ -136,8 +218,8 @@ let text = tablify(
 		"Summary":
 		{
 			"Number of Trials": 3,
-			"Average Result": 0.8833
-		}
+			"Average Result": 0.8833,
+		},
 	}
 );
 console.log( text );

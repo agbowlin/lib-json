@@ -63,7 +63,7 @@ function stringify ( Node, Options = null )
 	//---------------------------------------------------------------------
 	function stringify_recurse ( Node, Depth, Options, Context = null )
 	{
-		let json = '';
+		let text = '';
 
 		if ( typeof Node === 'undefined' )
 		{
@@ -71,21 +71,24 @@ function stringify ( Node, Options = null )
 		}
 		else if ( typeof Node === 'boolean' )
 		{
-			json += Node.toString();
+			text += Node.toString();
 		}
 		else if ( typeof Node === 'number' )
 		{
-			json += Node.toString();
+			text += Node.toString();
 		}
 		else if ( typeof Node === 'bigint' )
 		{
-			json += Node.toString();
+			text += Node.toString();
 		}
 		else if ( typeof Node === 'string' )
 		{
 			let value = Node.toString();
-			value = value.replace( Options.literal_quote, '\\' + Options.literal_quote );
-			json += `${ Options.literal_quote }${ value }${ Options.literal_quote }`;
+			if ( Options.literal_quote )
+			{
+				value = value.replace( Options.literal_quote, '\\' + Options.literal_quote );
+			}
+			text += `${ Options.literal_quote }${ value }${ Options.literal_quote }`;
 		}
 		else if ( typeof Node === 'symbol' )
 		{
@@ -99,74 +102,73 @@ function stringify ( Node, Options = null )
 		{
 			if ( Node === null )
 			{
-				json += 'null';
+				text += 'null';
 			}
 			else if ( Array.isArray( Node ) )
 			{
-				// if ( Depth > 0 )
-				{
-					json += Options.eol_char;
-				}
-				json += Options.tab_char.repeat( Depth );
-				json += '[';
-				json += Options.eol_char;
+				text += Options.eol_char;
+				text += Options.tab_char.repeat( Depth );
+				text += '[' + Options.space_char;
+				text += Options.eol_char;
 				for ( let index = 0; index < Node.length; index++ )
 				{
-					json += Options.tab_char.repeat( Depth + 1 );
-					json += stringify_recurse( Node[ index ], Depth + 1, Options, 'array-element' );
+					text += Options.tab_char.repeat( Depth + 1 );
+					text += stringify_recurse( Node[ index ], Depth + 1, Options, 'array-element' );
 					if ( ( index < ( Node.length - 1 ) ) || Options.liberal_commas )
 					{
-						json += ',';
+						text += ',' + Options.space_char;
 					}
-					json += Options.eol_char;
+					text += Options.eol_char;
 				}
-				json += Options.tab_char.repeat( Depth );
-				json += ']';
+				text += Options.tab_char.repeat( Depth );
+				if ( !Options.eol_char ) { text += Options.space_char; }
+				text += ']';
 			}
 			else
 			{
 				if ( Context === 'field-value' )
 				{
-					json += Options.eol_char;
-					json += Options.tab_char.repeat( Depth );
+					text += Options.eol_char;
+					text += Options.tab_char.repeat( Depth );
 				}
-				json += '{';
-				json += Options.eol_char;
+				text += '{' + Options.space_char;
+				text += Options.eol_char;
 				let keys = Object.keys( Node );
 				let max_key_length = 0;
 				keys.map( ( key ) => { if ( key.length > max_key_length ) { max_key_length = key.length; } } );
 				for ( let index = 0; index < keys.length; index++ )
 				{
 					let key = keys[ index ];
-					json += Options.tab_char.repeat( Depth + 1 );
+					text += Options.tab_char.repeat( Depth + 1 );
 					//TODO: Implement: Options.always_quote_identifiers = false
-					json += `${ Options.identifier_quote }${ key }${ Options.identifier_quote }`;
-					json += ':';
+					text += `${ Options.identifier_quote }${ key }${ Options.identifier_quote }`;
+					text += ':';
 					if ( Options.align_values )
 					{
-						json += ' '.repeat( max_key_length - key.length );
+						text += ' '.repeat( max_key_length - key.length );
 					}
-					json += Options.space_char;
-					json += stringify_recurse( Node[ key ], Depth + 1, Options, 'field-value' );
+					text += Options.space_char;
+					text += stringify_recurse( Node[ key ], Depth + 1, Options, 'field-value' );
 					if ( ( index < ( keys.length - 1 ) ) || Options.liberal_commas )
 					{
-						json += ',';
+						text += ',' + Options.space_char;
 					}
-					json += Options.eol_char;
+					text += Options.eol_char;
 				}
-				json += Options.tab_char.repeat( Depth );
-				json += '}';
+				text += Options.tab_char.repeat( Depth );
+				if ( !Options.eol_char ) { text += Options.space_char; }
+				text += '}';
 			}
 		}
 
-		return json;
+		return text;
 	}
 
 	//---------------------------------------------------------------------
 	Options = Options ? Options : {};
-	Options.identifier_quote = Options.identifier_quote ? Options.identifier_quote : `"`;
-	Options.always_quote_identifiers = Options.always_quote_identifiers ? Options.always_quote_identifiers : true;
-	Options.literal_quote = Options.literal_quote ? Options.literal_quote : `"`;
+	Options.identifier_quote = Options.identifier_quote ? Options.identifier_quote : ``;
+	Options.always_quote_identifiers = Options.always_quote_identifiers ? Options.always_quote_identifiers : false;
+	Options.literal_quote = Options.literal_quote ? Options.literal_quote : ``;
 	Options.eol_char = Options.eol_char ? Options.eol_char : ``;
 	Options.tab_char = Options.tab_char ? Options.tab_char : ``;
 	Options.space_char = Options.space_char ? Options.space_char : ``;
