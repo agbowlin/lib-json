@@ -58,6 +58,18 @@
 		{
 			"type": "node",
 			"request": "launch",
+			"name": "tablify",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/src/json-tablify.js"
+		},
+		{
+			"name": "------------------------------------------",
+		},
+		{
+			"type": "node",
+			"request": "launch",
 			"name": "Test Newlines",
 			"skipFiles": [
 				"<node_internals>/**"

@@ -26,6 +26,16 @@
 	- `extroverted_braces`: Braces on own line.
 - Implement another set of options beyond very pretty: `STRINGIFY_OPTIONS_EXPRESSIVE`
 - generate_model: Implement (from json2model.js)
+- generate_table: Display json in a tabluar format:
+```
+	report_name :
+	timestamp   :
+
+	field_1     | field_2
+	------------+----------------
+	foo         | bar
+	willy wonka | rumplestiltskin
+```
 
 
 ### Parse
@@ -33,4 +43,5 @@
 - Processing time for `parse` is slow
 - calculate_transform: Handle order in arrays
 - apply_transform: Implement
+- Option to stop parsing when indent count reaches 0.
 
