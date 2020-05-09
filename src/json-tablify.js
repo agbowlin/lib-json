@@ -186,40 +186,40 @@ function tablify ( Node, Options = {} )
 }
 
 
-let text = tablify(
-	{
-		"Report Name": 'My Super Technical Report',
-		"Timestamp": ( new Date() ).toString(),
-		"Author": 'Computer Algorithm',
-		"Raw Data": [ 0.95, 0.83, 0.87 ],
-		"More Raw Data":
-			[
-				[ 1, 2, 3 ],
-				[ 0.95, 0.83, 0.87 ],
-			],
-		"Results":
-			[
-				{
-					"Trial Number": 1,
-					"Source": 'Category A',
-					"Result": 0.95,
-				},
-				{
-					"Trial Number": 2,
-					"Source": 'Category B',
-					"Result": 0.83,
-				},
-				{
-					"Trial Number": 3,
-					"Source": 'Category C',
-					"Result": 0.87,
-				},
-			],
-		"Summary":
-		{
-			"Number of Trials": 3,
-			"Average Result": 0.8833,
-		},
-	}
-);
-console.log( text );
+// let text = tablify(
+// 	{
+// 		"Report Name": 'My Super Technical Report',
+// 		"Timestamp": ( new Date() ).toString(),
+// 		"Author": 'Computer Algorithm',
+// 		"Raw Data": [ 0.95, 0.83, 0.87 ],
+// 		"More Raw Data":
+// 			[
+// 				[ 1, 2, 3 ],
+// 				[ 0.95, 0.83, 0.87 ],
+// 			],
+// 		"Results":
+// 			[
+// 				{
+// 					"Trial Number": 1,
+// 					"Source": 'Category A',
+// 					"Result": 0.95,
+// 				},
+// 				{
+// 					"Trial Number": 2,
+// 					"Source": 'Category B',
+// 					"Result": 0.83,
+// 				},
+// 				{
+// 					"Trial Number": 3,
+// 					"Source": 'Category C',
+// 					"Result": 0.87,
+// 				},
+// 			],
+// 		"Summary":
+// 		{
+// 			"Number of Trials": 3,
+// 			"Average Result": 0.8833,
+// 		},
+// 	}
+// );
+// console.log( text );

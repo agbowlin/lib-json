@@ -1,4 +1,5 @@
 const LIB_PATH = require( 'path' );
+const NPM_NODE_EXTERNALS = require('webpack-node-externals');
 
 module.exports =
 {
@@ -14,7 +15,9 @@ module.exports =
 		globalObject: 'typeof self !== \'undefined\' ? self : this',
 
 	},
-	externals: {},
+	// externals: {},
+	target: 'node', // in order to ignore built-in modules like path, fs, etc.
+	externals: [ NPM_NODE_EXTERNALS() ], // in order to ignore all modules in node_modules folder
 };
 
 
