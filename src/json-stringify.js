@@ -12,7 +12,7 @@ exports.stringify = stringify;
 
 
 //---------------------------------------------------------------------
-function STRINGIFY_OPTIONS_MINIMAL ()
+function STRINGIFY_OPTIONS_MINIMAL()
 {
 	return {
 		identifier_quote: `"`,
@@ -23,7 +23,7 @@ function STRINGIFY_OPTIONS_MINIMAL ()
 
 
 //---------------------------------------------------------------------
-function STRINGIFY_OPTIONS_STANDARD ()
+function STRINGIFY_OPTIONS_STANDARD()
 {
 	return {
 		identifier_quote: `"`,
@@ -37,15 +37,15 @@ function STRINGIFY_OPTIONS_STANDARD ()
 
 
 //---------------------------------------------------------------------
-function STRINGIFY_OPTIONS_VERYPRETTY ()
+function STRINGIFY_OPTIONS_VERYPRETTY()
 {
 	return {
 		identifier_quote: `'`,
-		always_quote_identifiers: false, // Not implemented
 		literal_quote: `"`,
 		eol_char: '\n',
 		tab_char: '    ',
 		space_char: ' ',
+		always_quote_identifiers: false, // Not implemented
 		liberal_commas: true,
 		align_values: true,
 		//TODO: The following options have not been implemented:
@@ -57,11 +57,11 @@ function STRINGIFY_OPTIONS_VERYPRETTY ()
 
 
 //---------------------------------------------------------------------
-function stringify ( Node, Options = null )
+function stringify( Node, Options = null )
 {
 
 	//---------------------------------------------------------------------
-	function stringify_recurse ( Node, Depth, Options, Context = null )
+	function stringify_recurse( Node, Depth, Options, Context = null )
 	{
 		let text = '';
 
@@ -88,7 +88,7 @@ function stringify ( Node, Options = null )
 			{
 				value = value.replace( Options.literal_quote, '\\' + Options.literal_quote );
 			}
-			text += `${ Options.literal_quote }${ value }${ Options.literal_quote }`;
+			text += `${Options.literal_quote}${value}${Options.literal_quote}`;
 		}
 		else if ( typeof Node === 'symbol' )
 		{
@@ -141,7 +141,7 @@ function stringify ( Node, Options = null )
 					let key = keys[ index ];
 					text += Options.tab_char.repeat( Depth + 1 );
 					//TODO: Implement: Options.always_quote_identifiers = false
-					text += `${ Options.identifier_quote }${ key }${ Options.identifier_quote }`;
+					text += `${Options.identifier_quote}${key}${Options.identifier_quote}`;
 					text += ':';
 					if ( Options.align_values )
 					{
@@ -165,13 +165,26 @@ function stringify ( Node, Options = null )
 	}
 
 	//---------------------------------------------------------------------
+	function set_string( Value, Default )
+	{
+		if ( typeof Value === 'string' )
+		{
+			return Value;
+		}
+		else
+		{
+			return Default;
+		}
+	}
+
+	//---------------------------------------------------------------------
 	Options = Options ? Options : {};
-	Options.identifier_quote = Options.identifier_quote ? Options.identifier_quote : ``;
+	Options.identifier_quote = set_string( Options.identifier_quote, `"` );
+	Options.literal_quote = set_string( Options.literal_quote, `"` );
+	Options.eol_char = set_string( Options.eol_char, '' );
+	Options.tab_char = set_string( Options.tab_char, '' );
+	Options.space_char = set_string( Options.space_char, '' );
 	Options.always_quote_identifiers = Options.always_quote_identifiers ? Options.always_quote_identifiers : false;
-	Options.literal_quote = Options.literal_quote ? Options.literal_quote : ``;
-	Options.eol_char = Options.eol_char ? Options.eol_char : ``;
-	Options.tab_char = Options.tab_char ? Options.tab_char : ``;
-	Options.space_char = Options.space_char ? Options.space_char : ``;
 	Options.liberal_commas = Options.liberal_commas ? Options.liberal_commas : false;
 	Options.align_values = Options.align_values ? Options.align_values : false;
 	Options.extroverted_arrays = Options.extroverted_arrays ? Options.extroverted_arrays : false;

@@ -144,6 +144,21 @@ exports.STRINGIFY_OPTIONS_VERYPRETTY = json_stringify.STRINGIFY_OPTIONS_VERYPRET
 //=====================================================================
 //=====================================================================
 //
+//		Tablify
+//
+//=====================================================================
+//=====================================================================
+
+
+//---------------------------------------------------------------------
+const json_tablify = require( './src/json-tablify.js' );
+
+exports.tablify = json_tablify.tablify;
+
+
+//=====================================================================
+//=====================================================================
+//
 //		Parse
 //
 //=====================================================================
@@ -152,7 +167,6 @@ exports.STRINGIFY_OPTIONS_VERYPRETTY = json_stringify.STRINGIFY_OPTIONS_VERYPRET
 
 //---------------------------------------------------------------------
 const json_parse = require( './src/json-parse.js' );
-// const object_builder = require( './src/object-builder.js' );
 
 exports.parse = json_parse.parse;
 exports.tokenize = json_parse.tokenize;
