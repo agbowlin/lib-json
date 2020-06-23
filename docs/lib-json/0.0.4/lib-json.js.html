@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>lib-json.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-lib-initext.html">lib-initext</a></li><li><a href="module-lib-json.html">lib-json</a><ul class='methods'><li data-type='method'><a href="module-lib-json.html#.clone">clone</a></li><li data-type='method'><a href="module-lib-json.html#.find_name">find_name</a></li><li data-type='method'><a href="module-lib-json.html#.find_value">find_value</a></li><li data-type='method'><a href="module-lib-json.html#.get_value">get_value</a></li><li data-type='method'><a href="module-lib-json.html#.has_path">has_path</a></li><li data-type='method'><a href="module-lib-json.html#.set_value">set_value</a></li><li data-type='method'><a href="module-lib-json.html#~parse">parse</a></li></ul></li><li></li><li></li><li></li><li></li><li></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">lib-json.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
+/**
+ * @module lib-json
+ */
+
+
+//=====================================================================
+//=====================================================================
+//
+//		Traverse
+//
+//=====================================================================
+//=====================================================================
+
+
+//---------------------------------------------------------------------
+const json_traverse = require( './src/json-traverse.js' );
+
+exports.traverse = json_traverse.traverse;
+
+
+//---------------------------------------------------------------------
+/**
+ * Test if a Javascript object contains the specified path.
+ * @param {object} Root - The root Javascript object to begin searching in.
+ * @param {string} Path - The path to find in the object.
+ * @return {boolean} True if Path exists in Root.
+ */
+exports.has_path =
+	function has_path ( Root, Path )
+	{
+		return json_traverse.traverse( Root, info => 
+		{
+			if ( info.path === Path ) { return true; }
+		} );
+	}
+
+
+//---------------------------------------------------------------------
+/**
+ * Find a field name within a Javascript object.
+ * @param {object} Root - The root Javascript object to begin searching in.
+ * @param {string} Name - The name to find in the object.
+ * @return {boolean} The path of the located node.
+ */
+exports.find_name =
+	function find_name ( Root, Name )
+	{
+		return json_traverse.traverse( Root, info => { if ( info.name === Name ) { return info.path; } } );
+	}
+
+
+//---------------------------------------------------------------------
+/**
+ * Find a field value within a Javascript object.
+ * @param {object} Root - The root Javascript object to begin searching in.
+ * @param {string} Value - The value to find in the object.
+ * @return {boolean} The path of the located node.
+ */
+exports.find_value =
+	function find_value ( Root, Value )
+	{
+		return json_traverse.traverse( Root, info => { if ( info.value === Value ) { return info.path; } } );
+	}
+
+
+//---------------------------------------------------------------------
+/**
+ * Get the field value at a specific path within a Javascript object.
+ * @param {object} Root - The root Javascript object to begin searching in.
+ * @param {string} Path - The path to find in the object.
+ * @return {boolean} The value that was found.
+ */
+exports.get_value =
+	function get_value ( Root, Path )
+	{
+		return json_traverse.traverse( Root, info => { if ( info.path === Path ) { return info.value; } } );
+	}
+
+
+//---------------------------------------------------------------------
+/**
+ * Set the field value at a specific path within a Javascript object.
+ * @param {object} Root - The root Javascript object to begin searching in.
+ * @param {string} Path - The path to find in the object.
+ * @param {any} Value - The value to set in the object.
+ * @return {boolean} The value that was set.
+ */
+exports.set_value =
+	function set_value ( Root, Path, Value )
+	{
+		return json_traverse.traverse( Root, info =>
+		{
+			if ( info.path === Path ) 
+			{
+				info.parent[ info.name ] = Value;
+				return Value;
+			}
+		} );
+	}
+
+
+//=====================================================================
+//=====================================================================
+//
+//		Stringify
+//
+//=====================================================================
+//=====================================================================
+
+
+//---------------------------------------------------------------------
+const json_stringify = require( './src/json-stringify.js' );
+
+exports.stringify = json_stringify.stringify;
+
+
+//---------------------------------------------------------------------
+/**
+ * A predefined set of options to pass to stringify.
+ * This set of options produces a minimal Json representation akin
+ * to Javascript's default stringify. (i.e. single line, minimal spacing)
+ */
+exports.STRINGIFY_OPTIONS_MINIMAL = json_stringify.STRINGIFY_OPTIONS_MINIMAL();
+
+//---------------------------------------------------------------------
+/**
+ * A predefined set of options to pass to stringify.
+ * This set of options produces a standard Json representation akin
+ * to Javascript's stringify called with spacing options.
+ * (i.e. multi line, spacing for layout)
+ */
+exports.STRINGIFY_OPTIONS_STANDARD = json_stringify.STRINGIFY_OPTIONS_STANDARD();
+
+//---------------------------------------------------------------------
+/**
+ * A predefined set of options to pass to stringify.
+ * This set of options produces a Json representation akin
+ * to Javascript code. (i.e. multi line, spacing for layout)
+ */
+exports.STRINGIFY_OPTIONS_VERYPRETTY = json_stringify.STRINGIFY_OPTIONS_VERYPRETTY();
+
+
+//=====================================================================
+//=====================================================================
+//
+//		Tablify
+//
+//=====================================================================
+//=====================================================================
+
+
+//---------------------------------------------------------------------
+const json_tablify = require( './src/json-tablify.js' );
+
+exports.tablify = json_tablify.tablify;
+
+
+//=====================================================================
+//=====================================================================
+//
+//		IniText
+//
+//=====================================================================
+//=====================================================================
+
+
+//---------------------------------------------------------------------
+const json_initext = require( './src/json-initext.js' );
+
+exports.to_initext = json_initext.to_initext;
+exports.from_initext = json_initext.from_initext;
+
+
+//=====================================================================
+//=====================================================================
+//
+//		Parse
+//
+//=====================================================================
+//=====================================================================
+
+
+//---------------------------------------------------------------------
+const json_parse = require( './src/json-parse.js' );
+
+exports.parse = json_parse.parse;
+exports.tokenize = json_parse.tokenize;
+exports.build_object = json_parse.build_object;
+
+
+//---------------------------------------------------------------------
+/**
+ * Performs a deep copy of an object.
+ */
+exports.clone =
+	function clone ( Json )
+	{
+		let json = json_stringify.stringify( Json );
+		let tokens = json_parse.tokenize( json );
+		// let clone = object_builder.build_object( tokens );
+		let clone = json_parse.build_object( tokens );
+		return clone;
+	};
+
+
+//=====================================================================
+//=====================================================================
+//
+//		Transform
+//
+//=====================================================================
+//=====================================================================
+
+
+//---------------------------------------------------------------------
+const json_transform = require( './src/json-transform.js' );
+
+exports.calculate_transform = json_transform.calculate_transform
+exports.apply_transform = json_transform.apply_transform
+
+
+//=====================================================================
+//=====================================================================
+//
+//		Other
+//
+//=====================================================================
+//=====================================================================
+
+// exports.difference = JsonComparer.difference;
+// exports.patch = JsonComparer.patch;
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Sat Jun 13 2020 14:36:04 GMT-0500 (Central Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>
