@@ -25,7 +25,7 @@ describe( `Json Tablify`, function ()
 	{
 		it( `should tablify test data`, function ()
 		{
-			result = LIB_JSON.tablify( test_1_json );
+			result = LIB_JSON.Tablify( test_1_json );
 			LIB_ASSERT.notEqual( result, null );
 		} );
 	} );

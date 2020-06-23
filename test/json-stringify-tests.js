@@ -24,38 +24,38 @@ describe( `Json Stringify`, function ()
 	{
 		it( `should stringify null [null]`, function ()
 		{
-			result = LIB_JSON.stringify( null );
+			result = LIB_JSON.Stringify( null );
 			LIB_ASSERT.equal( result, 'null' );
 		} );
 		it( `should stringify empty string [""]`, function ()
 		{
-			result = LIB_JSON.stringify( "" );
+			result = LIB_JSON.Stringify( "" );
 			LIB_ASSERT.equal( result, '""' );
 		} );
 		it( `should stringify empty array [[]]`, function ()
 		{
-			result = LIB_JSON.stringify( [] );
+			result = LIB_JSON.Stringify( [] );
 			LIB_ASSERT.equal( result, '[]' );
 		} );
 		it( `should stringify empty object [{}]`, function ()
 		{
-			result = LIB_JSON.stringify( {} );
+			result = LIB_JSON.Stringify( {} );
 			LIB_ASSERT.equal( result, '{}' );
 		} );
 		it( `should stringify [true]`, function ()
 		{
-			result = LIB_JSON.stringify( true );
+			result = LIB_JSON.Stringify( true );
 			LIB_ASSERT.equal( result, 'true' );
 		} );
 		it( `should stringify [3.14]`, function ()
 		{
-			result = LIB_JSON.stringify( 3.14 );
+			result = LIB_JSON.Stringify( 3.14 );
 			LIB_ASSERT.equal( result, '3.14' );
 		} );
 		it( `should stringify ["Hello World!"]`, function ()
 		{
 			result = JSON.stringify( "Hello World!" );
-			result = LIB_JSON.stringify( "Hello World!" );
+			result = LIB_JSON.Stringify( "Hello World!" );
 			LIB_ASSERT.equal( result, `"Hello World!"` );
 		} );
 	} );
@@ -67,56 +67,56 @@ describe( `Json Stringify`, function ()
 		it( `should stringify null [null] the same way`, function ()
 		{
 			LIB_ASSERT.equal(
-				LIB_JSON.stringify( null ),
+				LIB_JSON.Stringify( null ),
 				JSON.stringify( null )
 			);
 		} );
 		it( `should stringify empty string [""] the same way`, function ()
 		{
 			LIB_ASSERT.equal(
-				LIB_JSON.stringify( "" ),
+				LIB_JSON.Stringify( "" ),
 				JSON.stringify( "" )
 			);
 		} );
 		it( `should stringify empty array [[]] the same way`, function ()
 		{
 			LIB_ASSERT.equal(
-				LIB_JSON.stringify( [] ),
+				LIB_JSON.Stringify( [] ),
 				JSON.stringify( [] )
 			);
 		} );
 		it( `should stringify empty object [{}] the same way`, function ()
 		{
 			LIB_ASSERT.equal(
-				LIB_JSON.stringify( {} ),
+				LIB_JSON.Stringify( {} ),
 				JSON.stringify( {} )
 			);
 		} );
 		it( `should stringify [true] the same way`, function ()
 		{
 			LIB_ASSERT.equal(
-				LIB_JSON.stringify( true ),
+				LIB_JSON.Stringify( true ),
 				JSON.stringify( true )
 			);
 		} );
 		it( `should stringify [3.14] the same way`, function ()
 		{
 			LIB_ASSERT.equal(
-				LIB_JSON.stringify( 3.14 ),
+				LIB_JSON.Stringify( 3.14 ),
 				JSON.stringify( 3.14 )
 			);
 		} );
 		it( `should stringify ["Hello World!"] the same way`, function ()
 		{
 			LIB_ASSERT.equal(
-				LIB_JSON.stringify( "Hello World!" ),
+				LIB_JSON.Stringify( "Hello World!" ),
 				JSON.stringify( "Hello World!" )
 			);
 		} );
 		it( `should stringify test_1.json the same way`, function ()
 		{
 			LIB_ASSERT.equal(
-				LIB_JSON.stringify( test_1_data ),
+				LIB_JSON.Stringify( test_1_data ),
 				JSON.stringify( test_1_data )
 			);
 		} );
@@ -131,7 +131,7 @@ describe( `Json Stringify`, function ()
 		it( `should stringify faster than Node's JSON`, function ()
 		{
 			let t0 = new Date();
-			let json = LIB_JSON.stringify( test_small_data );
+			let json = LIB_JSON.Stringify( test_small_data );
 			let duration1 = ( ( new Date() ) - t0 );
 
 			t0 = new Date();

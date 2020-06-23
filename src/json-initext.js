@@ -8,12 +8,12 @@
 
 
 //---------------------------------------------------------------------
-exports.to_initext = to_initext;
-exports.from_initext = from_initext;
+exports.ToIniText = ToIniText;
+exports.FromIniText = FromIniText;
 
 
 //---------------------------------------------------------------------
-function to_initext ( Data )
+function ToIniText ( Data )
 {
 	//NOTE: This function has the following side effects:
 	//		- ignores all sections that are not of type object
@@ -48,7 +48,7 @@ function to_initext ( Data )
 
 
 //---------------------------------------------------------------------
-function from_initext ( IniText )
+function FromIniText ( IniText )
 {
 	//NOTE: This function has the following side effects:
 	//		- ignores all lines before the first section is found

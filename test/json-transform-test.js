@@ -24,12 +24,12 @@ describe( `Json Transform`, function ()
 
 		it( `should return an empty transform for equal text values`, function ()
 		{
-			result = LIB_JSON.calculate_transform( "text", "text", '$' );
+			result = LIB_JSON.CalculateTransform( "text", "text", '$' );
 			LIB_ASSERT.equal( result.entries.length, 0 );
 		} );
 		it( `should return a single value mismatch for non-equal text values`, function ()
 		{
-			result = LIB_JSON.calculate_transform( "text1", "text2", '$' );
+			result = LIB_JSON.CalculateTransform( "text1", "text2", '$' );
 			LIB_ASSERT.equal( result.entries.length, 1 );
 			LIB_ASSERT.equal( result.entries[ 0 ].path, '$' );
 			LIB_ASSERT.equal( result.entries[ 0 ].type, 'value mismatch' );
@@ -38,12 +38,12 @@ describe( `Json Transform`, function ()
 
 		it( `should return an empty transform for equal numeric values`, function ()
 		{
-			result = LIB_JSON.calculate_transform( 3.14, 3.14, '$' );
+			result = LIB_JSON.CalculateTransform( 3.14, 3.14, '$' );
 			LIB_ASSERT.equal( result.entries.length, 0 );
 		} );
 		it( `should return a single value mismatch for non-equal numeric values`, function ()
 		{
-			result = LIB_JSON.calculate_transform( 3, 3.14, '$' );
+			result = LIB_JSON.CalculateTransform( 3, 3.14, '$' );
 			LIB_ASSERT.equal( result.entries.length, 1 );
 			LIB_ASSERT.equal( result.entries[ 0 ].path, '$' );
 			LIB_ASSERT.equal( result.entries[ 0 ].type, 'value mismatch' );
@@ -52,7 +52,7 @@ describe( `Json Transform`, function ()
 
 		it( `should return a single type mismatch for non-equal value type`, function ()
 		{
-			result = LIB_JSON.calculate_transform( "text1", 3.14, '$' );
+			result = LIB_JSON.CalculateTransform( "text1", 3.14, '$' );
 			LIB_ASSERT.equal( result.entries.length, 1 );
 			LIB_ASSERT.equal( result.entries[ 0 ].path, '$' );
 			LIB_ASSERT.equal( result.entries[ 0 ].type, 'type mismatch' );
@@ -61,7 +61,7 @@ describe( `Json Transform`, function ()
 
 		it( `should detect differences within an array`, function ()
 		{
-			result = LIB_JSON.calculate_transform( [ 1, 2, 3 ], [ 1, 2, 3.14 ], '$' );
+			result = LIB_JSON.CalculateTransform( [ 1, 2, 3 ], [ 1, 2, 3.14 ], '$' );
 			LIB_ASSERT.equal( result.entries.length, 1 );
 			LIB_ASSERT.equal( result.entries[ 0 ].path, '$[2]' );
 			LIB_ASSERT.equal( result.entries[ 0 ].type, 'value mismatch' );
@@ -70,7 +70,7 @@ describe( `Json Transform`, function ()
 
 		it( `should detect differences within an object`, function ()
 		{
-			result = LIB_JSON.calculate_transform(
+			result = LIB_JSON.CalculateTransform(
 				{ one: 1, two: 2, three: 3 },
 				{ one: 1, two: 2, three: 3.14 },
 				'$' );

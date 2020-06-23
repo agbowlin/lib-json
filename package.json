@@ -1,6 +1,6 @@
 {
   "name": "lib-json",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "JSON Utilities",
   "main": "lib-json.js",
   "directories": {
