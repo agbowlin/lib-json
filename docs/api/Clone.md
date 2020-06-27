@@ -1,0 +1,3 @@
+<!-- api/Clone.md -->
+
+### Clone

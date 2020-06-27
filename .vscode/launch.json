@@ -44,8 +44,9 @@
 			"name": "Build Docs",
 			"program": "${workspaceFolder}/node_modules/.bin/jsdoc",
 			"args": [
-				"-c",
-				"jsdoc.config.js"
+				"--configure",
+				"jsdoc.config.js",
+				// "--explain",
 			],
 			"cwd": "${workspaceFolder}",
 			"internalConsoleOptions": "openOnSessionStart",

@@ -1,0 +1,3 @@
+<!-- api/FromIniText.md -->
+
+### FromIniText

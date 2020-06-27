@@ -1,5 +1,6 @@
-"use strict"
+// "use strict";
 
+const package = require( './package.json' );
 
 module.exports =
 {
@@ -13,15 +14,15 @@ module.exports =
 	{
 		include:
 			[
-				'./package.json',
-				'./readme.md',
+				// './package.json',
+				// './readme.md',
 				'./lib-json.js',
 				'./src/',
 			],
 		// includePattern: ".+\\.js(doc|x)?$",
 		// excludePattern: "(^|\\/|\\\\)_",
-		// readme: "./readme.md",
-		// package: "./package.json",
+		readme: "./readme.md",
+		package: "./package.json",
 	},
 	tags:
 	{
@@ -32,7 +33,7 @@ module.exports =
 		// template: "templates/default",
 		template: "node_modules/docdash/",
 		encoding: "utf8",
-		destination: "./docs/",
+		destination: "./docs/lib-json/" + package.version,
 		// recurse: true,
 		// tutorials: "path/to/tutorials",
 		verbose: true,

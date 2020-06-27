@@ -1,6 +1,39 @@
 
-# lib-json
+<!-- usage/overview.md -->
 
+## Overview
+
+`lib-json` is a JavaScript library for working with JavaScript objects.
+Primarily this library supports the serialization and deserialization of
+JavaScript objects to and from various text formats.
+
+---
+
+## Traversing an Object
+
+---
+
+## Path Based Operations
+
+---
+
+## Serialization Formats
+
+#### JSON
+
+#### INI
+
+#### Tabular
+
+---
+
+## Desrialization Formats
+
+#### JSON
+
+#### INI
+
+---
 
 ## TODO
 
@@ -32,7 +65,7 @@
 - Option to stop parsing when indent count reaches 0.
 
 
-## Transform
+### Transform
 
 - calculate_transform: Handle order in arrays
 - apply_transform: Implement

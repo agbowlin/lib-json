@@ -4,6 +4,7 @@
  */
 
 const LIB_STRINGIFY = require( './json-stringify.js' );
+const LIB_STRINGIFY_OPTIONS = require( './json-stringify-options.js' );
 
 
 //---------------------------------------------------------------------
@@ -11,14 +12,19 @@ exports.Tablify = Tablify;
 
 
 //---------------------------------------------------------------------
-function Tablify ( Node, Options = {} )
+/**
+ * 
+ * @param {object} Node - The object to Tablify.
+ * @param {object} Options - A TablifySettings object containing format settings.
+ */
+function Tablify( Node, Options = {} )
 {
 
 	//---------------------------------------------------------------------
-	function tablify_recurse ( Node, Depth, Options, Context = null ) 
+	function tablify_recurse( Node, Depth, Options, Context = null ) 
 	{
 		let text = '';
-		let stringify_options = LIB_STRINGIFY.STRINGIFY_OPTIONS_MINIMAL;
+		let stringify_options = LIB_STRINGIFY_OPTIONS.StringifyOptionsMinimal();
 		stringify_options.identifier_quote = '';
 		stringify_options.always_quote_identifiers = false;
 		stringify_options.literal_quote = '';
@@ -162,7 +168,7 @@ function Tablify ( Node, Options = {} )
 				{
 					let key = keys[ index ];
 					text += Options.tab_char.repeat( Depth );
-					text += `${ key }${ ''.padEnd( max_key_length - key.length ) } : `;
+					text += `${key}${''.padEnd( max_key_length - key.length )} : `;
 					text += tablify_recurse( Node[ key ], Depth + 1, Options, 'field-value' );
 					if ( index < ( key.length - 1 ) ) { text += Options.eol_char; }
 				}

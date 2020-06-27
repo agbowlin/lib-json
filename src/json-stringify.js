@@ -5,58 +5,16 @@
 
 
 //---------------------------------------------------------------------
-exports.STRINGIFY_OPTIONS_MINIMAL = STRINGIFY_OPTIONS_MINIMAL;
-exports.STRINGIFY_OPTIONS_STANDARD = STRINGIFY_OPTIONS_STANDARD;
-exports.STRINGIFY_OPTIONS_VERYPRETTY = STRINGIFY_OPTIONS_VERYPRETTY;
 exports.Stringify = Stringify;
 
 
 //---------------------------------------------------------------------
-function STRINGIFY_OPTIONS_MINIMAL()
-{
-	return {
-		identifier_quote: `"`,
-		always_quote_identifiers: true,
-		literal_quote: `"`,
-	};
-};
-
-
-//---------------------------------------------------------------------
-function STRINGIFY_OPTIONS_STANDARD()
-{
-	return {
-		identifier_quote: `"`,
-		always_quote_identifiers: true,
-		literal_quote: `"`,
-		eol_char: '\n',
-		tab_char: '    ',
-		space_char: ' ',
-	};
-};
-
-
-//---------------------------------------------------------------------
-function STRINGIFY_OPTIONS_VERYPRETTY()
-{
-	return {
-		identifier_quote: `'`,
-		literal_quote: `"`,
-		eol_char: '\n',
-		tab_char: '    ',
-		space_char: ' ',
-		always_quote_identifiers: false, // Not implemented
-		liberal_commas: true,
-		align_values: true,
-		//TODO: The following options have not been implemented:
-		extroverted_arrays: true,
-		extroverted_brackets: true,
-		extroverted_braces: true,
-	};
-};
-
-
-//---------------------------------------------------------------------
+/**
+ * Stringifies an object to a JSON string.
+ * Similar to Javascript's native JSON.stringify but with many more formatting options.
+ * @param {object} Node - The object to Stringify.
+ * @param {object} Options - A StringifyOptions object containing format settings.
+ */
 function Stringify( Node, Options = null )
 {
 

@@ -1,0 +1,3 @@
+<!-- api/ToIniText.md -->
+
+### ToIniText
