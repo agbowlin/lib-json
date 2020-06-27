@@ -1,5 +1,5 @@
 
-<!-- usage/overview.md -->
+<!-- README.md -->
 
 ## Overview
 
@@ -9,29 +9,7 @@ JavaScript objects to and from various text formats.
 
 ---
 
-## Traversing an Object
-
----
-
-## Path Based Operations
-
----
-
-## Serialization Formats
-
-#### JSON
-
-#### INI
-
-#### Tabular
-
----
-
-## Desrialization Formats
-
-#### JSON
-
-#### INI
+## Installation
 
 ---
 
