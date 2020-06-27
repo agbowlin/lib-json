@@ -4,7 +4,7 @@
 
 # lib-json <small>0.1.0</small>
 
-> A replacment for JavaScript's standard JSON functions
+> A replacment for JavaScript's standard JSON functions, and more!
 
 - Simple and lightweight (~10kB)
 - 100% JavaScript - No dependencies
