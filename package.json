@@ -21,15 +21,25 @@
     "js",
     "nodejs",
     "node",
-    "parse",
-    "stringify",
-    "parse",
-    "tokenize"
+    "Traverse",
+    "HasPath",
+    "FindName",
+    "FindValue",
+    "GetValue",
+    "SetValue",
+    "Stringify",
+    "Tablify",
+    "ToIniText",
+    "FromIniText",
+    "Parse",
+    "Tokenize",
+    "BuildObject",
+    "Clone"
   ],
   "main": "lib-json.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "test": "mocha -u bdd test"
+    "test": "mocha -u bdd tests"
   },
   "devDependencies": {
     "mocha": "^7.1.2",

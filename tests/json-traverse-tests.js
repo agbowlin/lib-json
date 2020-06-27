@@ -1,16 +1,15 @@
 "use strict";
 
-var LIB_FS = require( 'fs' );
-var LIB_ASSERT = require( 'assert' );
 
-const LIB_JSON = require( '../lib-json.js' );
-// const LIB_JSON = require( '../dist/lib-json.dist.js' );
+const LIB_JSON = require( '../src/lib-json.js' );
+const LIB_FS = require( 'fs' );
+const LIB_ASSERT = require( 'assert' );
+
 
 let test_1_json = LIB_FS.readFileSync( __dirname + '/test_1.json' );
 let test_1_data = JSON.parse( test_1_json );
 
 let result = null;
-let json = null;
 
 
 //---------------------------------------------------------------------

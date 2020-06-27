@@ -9,7 +9,6 @@
 	- [INI Text](guides/ini-text.md)
 
 - lib-json API
-	- [ApplyTransform ( Node, Transform )](api/ApplyTransform.md "lib-json.ApplyTransform()")
 	- [BuildObject ( Tokens )](api/BuildObject.md "lib-json.BuildObject()")
 	- [CalculateTransform ( Node1, Node2 )](api/CalculateTransform.md "lib-json.CalculateTransform()")
 	- [Clone ( Node )](api/Clone.md "lib-json.Clone()")
