@@ -1,5 +1,4 @@
-
-<!-- README.md -->
+<!-- guides/about.md -->
 
 ## Overview
 
@@ -7,9 +6,16 @@
 Primarily this library supports the serialization and deserialization of
 JavaScript objects to and from various text formats.
 
+This library contains additional functions to search within and modify JavaScript objects.
+
+
 ---
 
 ## Installation
+
+```bash
+npm install @liquicode/lib-json
+```
 
 ---
 
@@ -40,7 +46,7 @@ JavaScript objects to and from various text formats.
 ### Parse
 
 - Processing time for `parse` is slow
-- Option to stop parsing when indent count reaches 0.
+- Option to stop parsing when indent count reaches 0. Allows parsing of embedded json.
 
 
 ### Transform

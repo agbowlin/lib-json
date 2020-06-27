@@ -7,11 +7,16 @@
 Primarily this library supports the serialization and deserialization of
 JavaScript objects to and from various text formats.
 
+This library contains additional functions to search within and modify JavaScript objects.
+
+
 ---
 
 ## Installation
 
-
+```bash
+npm install @liquicode/lib-json
+```
 
 ---
 
