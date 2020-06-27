@@ -1,42 +1,10 @@
 "use strict";
-/**
- * @module lib-json
- */
 
 
 //---------------------------------------------------------------------
 exports.Traverse = Traverse;
 
 
-
-
-/**
- * The Info object provided to the Visitor callback function.
- * @typedef {object} VisitorInfo
- * @property {object}	parent	- The parent of the currently visited field.
- * @property {string}	name	- The parent of the currently visited field.
- * @property {any}		value	- The parent of the currently visited field.
- * @property {string}	path	- The parent of the currently visited field.
- * @property {integer}	depth	- The parent of the currently visited field.
- */
-
-
- /**
- * @callback VisitorCallback
- * @param {VisitorInfo} Info - Info object describing the currently visited
- * 								field in the object.
- */
-
-
-/**
- * @function Traverse
- * @description
- * Traverses an object structure.
- * Implements a depth-first visitor.
- * @param {object} Root - The root Javascript object to begin searching in.
- * @param {object} Visitor - The visitor function to call at each field.
- * 		Visitor is passed an info object describing the field.
- */
 //---------------------------------------------------------------------
 function Traverse ( Root, Visitor )
 {

@@ -27,6 +27,7 @@ Returns the value that was found at `Path`.
 ### Implementation
 
 This is a trivial implementation using the `Traverse` function.
+It is included and exported from `lib-json` as a matter of convenience.
 
 ```js
 function GetValue ( Root, Name )

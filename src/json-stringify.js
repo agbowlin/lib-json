@@ -1,7 +1,4 @@
 "use strict";
-/**
- * @module lib-json
- */
 
 
 //---------------------------------------------------------------------
@@ -9,17 +6,11 @@ exports.Stringify = Stringify;
 
 
 //---------------------------------------------------------------------
-/**
- * Stringifies an object to a JSON string.
- * Similar to Javascript's native JSON.stringify but with many more formatting options.
- * @param {object} Node - The object to Stringify.
- * @param {object} Options - A StringifyOptions object containing format settings.
- */
-function Stringify( Node, Options = null )
+function Stringify( Node, StringifyOptions = null )
 {
 
 	//---------------------------------------------------------------------
-	function stringify_recurse( Node, Depth, Options, Context = null )
+	function stringify_recurse( Node, Depth, StringifyOptions, Context = null )
 	{
 		let text = '';
 
@@ -42,11 +33,11 @@ function Stringify( Node, Options = null )
 		else if ( typeof Node === 'string' )
 		{
 			let value = Node.toString();
-			if ( Options.literal_quote )
+			if ( StringifyOptions.literal_quote )
 			{
-				value = value.replace( Options.literal_quote, '\\' + Options.literal_quote );
+				value = value.replace( StringifyOptions.literal_quote, '\\' + StringifyOptions.literal_quote );
 			}
-			text += `${Options.literal_quote}${value}${Options.literal_quote}`;
+			text += `${StringifyOptions.literal_quote}${value}${StringifyOptions.literal_quote}`;
 		}
 		else if ( typeof Node === 'symbol' )
 		{
@@ -64,57 +55,57 @@ function Stringify( Node, Options = null )
 			}
 			else if ( Array.isArray( Node ) )
 			{
-				text += Options.eol_char;
-				text += Options.tab_char.repeat( Depth );
-				text += '[' + Options.space_char;
-				text += Options.eol_char;
+				text += StringifyOptions.eol_char;
+				text += StringifyOptions.tab_char.repeat( Depth );
+				text += '[' + StringifyOptions.space_char;
+				text += StringifyOptions.eol_char;
 				for ( let index = 0; index < Node.length; index++ )
 				{
-					text += Options.tab_char.repeat( Depth + 1 );
-					text += stringify_recurse( Node[ index ], Depth + 1, Options, 'array-element' );
-					if ( ( index < ( Node.length - 1 ) ) || Options.liberal_commas )
+					text += StringifyOptions.tab_char.repeat( Depth + 1 );
+					text += stringify_recurse( Node[ index ], Depth + 1, StringifyOptions, 'array-element' );
+					if ( ( index < ( Node.length - 1 ) ) || StringifyOptions.liberal_commas )
 					{
-						text += ',' + Options.space_char;
+						text += ',' + StringifyOptions.space_char;
 					}
-					text += Options.eol_char;
+					text += StringifyOptions.eol_char;
 				}
-				text += Options.tab_char.repeat( Depth );
-				if ( !Options.eol_char ) { text += Options.space_char; }
+				text += StringifyOptions.tab_char.repeat( Depth );
+				if ( !StringifyOptions.eol_char ) { text += StringifyOptions.space_char; }
 				text += ']';
 			}
 			else
 			{
 				if ( Context === 'field-value' )
 				{
-					text += Options.eol_char;
-					text += Options.tab_char.repeat( Depth );
+					text += StringifyOptions.eol_char;
+					text += StringifyOptions.tab_char.repeat( Depth );
 				}
-				text += '{' + Options.space_char;
-				text += Options.eol_char;
+				text += '{' + StringifyOptions.space_char;
+				text += StringifyOptions.eol_char;
 				let keys = Object.keys( Node );
 				let max_key_length = 0;
 				keys.map( ( key ) => { if ( key.length > max_key_length ) { max_key_length = key.length; } } );
 				for ( let index = 0; index < keys.length; index++ )
 				{
 					let key = keys[ index ];
-					text += Options.tab_char.repeat( Depth + 1 );
+					text += StringifyOptions.tab_char.repeat( Depth + 1 );
 					//TODO: Implement: Options.always_quote_identifiers = false
-					text += `${Options.identifier_quote}${key}${Options.identifier_quote}`;
+					text += `${StringifyOptions.identifier_quote}${key}${StringifyOptions.identifier_quote}`;
 					text += ':';
-					if ( Options.align_values )
+					if ( StringifyOptions.align_values )
 					{
 						text += ' '.repeat( max_key_length - key.length );
 					}
-					text += Options.space_char;
-					text += stringify_recurse( Node[ key ], Depth + 1, Options, 'field-value' );
-					if ( ( index < ( keys.length - 1 ) ) || Options.liberal_commas )
+					text += StringifyOptions.space_char;
+					text += stringify_recurse( Node[ key ], Depth + 1, StringifyOptions, 'field-value' );
+					if ( ( index < ( keys.length - 1 ) ) || StringifyOptions.liberal_commas )
 					{
-						text += ',' + Options.space_char;
+						text += ',' + StringifyOptions.space_char;
 					}
-					text += Options.eol_char;
+					text += StringifyOptions.eol_char;
 				}
-				text += Options.tab_char.repeat( Depth );
-				if ( !Options.eol_char ) { text += Options.space_char; }
+				text += StringifyOptions.tab_char.repeat( Depth );
+				if ( !StringifyOptions.eol_char ) { text += StringifyOptions.space_char; }
 				text += '}';
 			}
 		}
@@ -136,20 +127,20 @@ function Stringify( Node, Options = null )
 	}
 
 	//---------------------------------------------------------------------
-	Options = Options ? Options : {};
-	Options.identifier_quote = set_string( Options.identifier_quote, `"` );
-	Options.literal_quote = set_string( Options.literal_quote, `"` );
-	Options.eol_char = set_string( Options.eol_char, '' );
-	Options.tab_char = set_string( Options.tab_char, '' );
-	Options.space_char = set_string( Options.space_char, '' );
-	Options.always_quote_identifiers = Options.always_quote_identifiers ? Options.always_quote_identifiers : false;
-	Options.liberal_commas = Options.liberal_commas ? Options.liberal_commas : false;
-	Options.align_values = Options.align_values ? Options.align_values : false;
-	Options.extroverted_arrays = Options.extroverted_arrays ? Options.extroverted_arrays : false;
-	Options.extroverted_brackets = Options.extroverted_brackets ? Options.extroverted_brackets : false;
-	Options.extroverted_braces = Options.extroverted_braces ? Options.extroverted_braces : false;
+	StringifyOptions = StringifyOptions ? StringifyOptions : {};
+	StringifyOptions.identifier_quote = set_string( StringifyOptions.identifier_quote, `"` );
+	StringifyOptions.literal_quote = set_string( StringifyOptions.literal_quote, `"` );
+	StringifyOptions.eol_char = set_string( StringifyOptions.eol_char, '' );
+	StringifyOptions.tab_char = set_string( StringifyOptions.tab_char, '' );
+	StringifyOptions.space_char = set_string( StringifyOptions.space_char, '' );
+	StringifyOptions.always_quote_identifiers = StringifyOptions.always_quote_identifiers ? StringifyOptions.always_quote_identifiers : false;
+	StringifyOptions.liberal_commas = StringifyOptions.liberal_commas ? StringifyOptions.liberal_commas : false;
+	StringifyOptions.align_values = StringifyOptions.align_values ? StringifyOptions.align_values : false;
+	StringifyOptions.extroverted_arrays = StringifyOptions.extroverted_arrays ? StringifyOptions.extroverted_arrays : false;
+	StringifyOptions.extroverted_brackets = StringifyOptions.extroverted_brackets ? StringifyOptions.extroverted_brackets : false;
+	StringifyOptions.extroverted_braces = StringifyOptions.extroverted_braces ? StringifyOptions.extroverted_braces : false;
 
 	//---------------------------------------------------------------------
-	return stringify_recurse( Node, 0, Options );
+	return stringify_recurse( Node, 0, StringifyOptions );
 }
 

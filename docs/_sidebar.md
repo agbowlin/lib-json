@@ -1,7 +1,12 @@
 <!-- _sidebar.md -->
 
-- lib-json
+- lib-json Docs
 	- [About](README.md "lib-json")
+	- [Field Traversal]()
+	- [Json Parse]()
+	- [Json Stringify]()
+	- [Json Tablify]()
+	- [INI Text]()
 
 - lib-json API
 	- [ApplyTransform ( Node, Transform )](api/ApplyTransform.md "lib-json.ApplyTransform()")

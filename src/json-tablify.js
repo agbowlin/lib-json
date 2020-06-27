@@ -1,7 +1,5 @@
 "use strict";
-/**
- * @module lib-json
- */
+
 
 const LIB_STRINGIFY = require( './json-stringify.js' );
 const LIB_STRINGIFY_OPTIONS = require( './json-stringify-options.js' );
@@ -12,12 +10,7 @@ exports.Tablify = Tablify;
 
 
 //---------------------------------------------------------------------
-/**
- * 
- * @param {object} Node - The object to Tablify.
- * @param {object} Options - A TablifySettings object containing format settings.
- */
-function Tablify( Node, Options = {} )
+function Tablify( Node, TablifyOptions = {} )
 {
 
 	//---------------------------------------------------------------------
@@ -180,15 +173,15 @@ function Tablify( Node, Options = {} )
 
 
 	//---------------------------------------------------------------------
-	Options = Options ? Options : {};
-	Options.literal_quote = Options.literal_quote ? Options.literal_quote : `"`;
-	Options.eol_char = Options.eol_char ? Options.eol_char : `\n`;
-	Options.tab_char = Options.tab_char ? Options.tab_char : `    `;
-	Options.max_tablify_depth = Options.max_tablify_depth ? Options.max_tablify_depth : 2;
+	TablifyOptions = TablifyOptions ? TablifyOptions : {};
+	TablifyOptions.literal_quote = TablifyOptions.literal_quote ? TablifyOptions.literal_quote : `"`;
+	TablifyOptions.eol_char = TablifyOptions.eol_char ? TablifyOptions.eol_char : `\n`;
+	TablifyOptions.tab_char = TablifyOptions.tab_char ? TablifyOptions.tab_char : `    `;
+	TablifyOptions.max_tablify_depth = TablifyOptions.max_tablify_depth ? TablifyOptions.max_tablify_depth : 2;
 
 
 	//---------------------------------------------------------------------
-	return tablify_recurse( Node, 0, Options, null );
+	return tablify_recurse( Node, 0, TablifyOptions, null );
 }
 
 

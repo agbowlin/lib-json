@@ -28,6 +28,7 @@ Returns the value that was set at `Path`.
 ### Implementation
 
 This is a trivial implementation using the `Traverse` function.
+It is included and exported from `lib-json` as a matter of convenience.
 
 ```js
 function SetValue ( Root, Name )
