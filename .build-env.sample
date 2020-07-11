@@ -1,0 +1,2 @@
+export REPO_URL='url to your docker repository'
+export AWS_PROFILE='AWS Profile name to use when authorizing a docker push'
