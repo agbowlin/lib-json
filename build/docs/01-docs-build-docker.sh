@@ -1,5 +1,10 @@
 #!/bin/bash
 . .build-env
-echo "01-docs-build-docker : AWS_ACCOUNT=$AWS_ACCOUNT"
+echo "------------------------------------------"
+echo "01-docs-build-docker.sh"
+echo " - REPO_URL    = $REPO_URL"
+echo " - AWS_PROFILE = $AWS_PROFILE"
+echo "------------------------------------------"
+
 docker build -t lib-json.liquicode.com:latest . --file lib-json.liquicode.com.dockerfile
-docker tag lib-json.liquicode.com:latest $AWS_ACCOUNT/lib-json.liquicode.com
+docker tag lib-json.liquicode.com:latest $REPO_URL/lib-json.liquicode.com

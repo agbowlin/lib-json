@@ -1,5 +1,10 @@
 #!/bin/bash
 . .build-env
-echo "02-docs-deploy-docker : AWS_ACCOUNT=$AWS_ACCOUNT"
-docker login -u AWS -p $(aws ecr get-login-password --profile admin) $AWS_ACCOUNT
-docker push $AWS_ACCOUNT/lib-json.liquicode.com
+echo "------------------------------------------"
+echo "02-docs-deploy-docker.sh"
+echo " - REPO_URL    = $REPO_URL"
+echo " - AWS_PROFILE = $AWS_PROFILE"
+echo "------------------------------------------"
+
+docker login -u AWS -p $(aws ecr get-login-password --profile $AWS_PROFILE) $REPO_URL
+docker push $REPO_URL/lib-json.liquicode.com
