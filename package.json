@@ -1,7 +1,7 @@
 {
-  "name": "lib-json",
+  "name": "@liquicode/lib-json",
   "version": "0.1.0",
-  "description": "A replacment for JavaScript's standard JSON functions and more",
+  "description": "A replacment library for JavaScript's standard JSON functions and more",
   "license": "MIT",
   "homepage": "http://lib-json.liquicode.com",
   "repository": {
@@ -14,6 +14,24 @@
       "email": "agbowlin@gmail.com",
       "homepage": "http://liquicode.com"
     }
+  ],
+  "main": "lib-json.js",
+  "files": [
+    "readme.md",
+    "VERSION",
+    "LICENSE",
+    "lib-json.js",
+    "src/*",
+    "docs/*",
+    "tests/*"
+  ],
+  "ignore": [
+    ".*",
+    "*.dockerfile",
+    "bower_components",
+    "node_modules",
+    "build",
+    "scratch"
   ],
   "keywords": [
     "json",
@@ -36,7 +54,6 @@
     "BuildObject",
     "Clone"
   ],
-  "main": "lib-json.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "test": "mocha -u bdd tests"

@@ -6,8 +6,8 @@ LABEL		description="lib-json.liquicode.com"
 RUN apt-get update && \
  apt-get -y install apache2
 
-# Install apache and copy source files
-COPY		.		/var/www/html
+# Copy source files
+COPY		./docs		/var/www/html
 
 # Configure apache
 RUN echo '. /etc/apache2/envvars' > /root/run_apache.sh && \

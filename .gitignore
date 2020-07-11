@@ -10,7 +10,7 @@ npm-debug.log
 .node_history
 
 .c9
-.vscode
+# .vscode
 .idea
 .DS_STORE
 .netbeans

@@ -8,7 +8,7 @@ module.exports =
 	entry: './src/lib-json.js',
 	output: {
 		path: __dirname,
-		filename: `lib-json.js`,
+		filename: `./lib-json.js`,
 
 		library: 'lib_json',
 		libraryTarget: 'umd',

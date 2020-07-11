@@ -28,6 +28,7 @@ npm install @liquicode/lib-json
 - Combine with hiernodejs to provide node navigation?
 - Convert to/from BSON
 - Convert to/from YAML
+- Make lib-json-cli.js
 
 
 ### Stringify
