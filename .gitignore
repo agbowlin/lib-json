@@ -16,3 +16,4 @@ npm-debug.log
 .netbeans
 nbproject
 scratch
+.build-env

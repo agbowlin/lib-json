@@ -1,3 +1,5 @@
 #!/bin/bash
-docker login -u AWS -p $(aws ecr get-login-password --profile admin) 803447307749.dkr.ecr.us-east-1.amazonaws.com
-docker push 803447307749.dkr.ecr.us-east-1.amazonaws.com/lib-json.liquicode.com
+. .build-env
+echo "02-docs-deploy-docker : AWS_ACCOUNT=$AWS_ACCOUNT"
+docker login -u AWS -p $(aws ecr get-login-password --profile admin) $AWS_ACCOUNT
+docker push $AWS_ACCOUNT/lib-json.liquicode.com
