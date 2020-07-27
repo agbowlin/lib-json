@@ -56,10 +56,9 @@
   ],
   "scripts": {
     "test": "mocha -u bdd tests",
-    "01-docs-build-docker": "bash build/docs/01-docs-build-docker.sh",
-    "02-docs-deploy-docker": "bash build/docs/02-docs-deploy-docker.sh",
     "01-lib-build-webpack": "bash build/lib/01-lib-build-webpack.sh",
-    "02-lib-publish-npm": "bash build/lib/02-lib-publish-npm.sh"
+    "02-lib-publish-npm": "bash build/lib/02-lib-publish-npm.sh",
+    "101-s3-sync": "bash build/s3/101-s3-sync.sh"
   },
   "devDependencies": {
     "mocha": "^7.1.2",
