@@ -1,7 +1,7 @@
 {
   "name": "@liquicode/lib-json",
   "version": "0.1.1",
-  "description": "A replacment library for JavaScript's standard JSON functions and more",
+  "description": "A replacement library for JavaScript's standard JSON functions and more",
   "license": "MIT",
   "homepage": "http://lib-json.liquicode.com",
   "repository": {
