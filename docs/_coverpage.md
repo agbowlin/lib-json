@@ -2,7 +2,7 @@
 
 ![logo](media/lib-json.png)
 
-# lib-json <small>(v0.1.2)</small>
+# lib-json <small>(v0.1.3)</small>
 
 <hr>
 
