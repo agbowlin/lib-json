@@ -10,9 +10,15 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
+
+	<!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css"> -->
 	<!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/buble.css"> -->
 	<!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/dark.css"> -->
 	<!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/pure.css"> -->
+
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/style.min.css"
+		title="docsify-darklight-theme" type="text/css" />
+
 </head>
 
 <body>
@@ -22,14 +28,28 @@
 			coverpage: true,
 			loadSidebar: true,
 			subMaxLevel: 2,
+			auto2top: true,
+			// themeColor: '#34495E', // grey
+			themeColor: '#2980B9', // bleu
+			notFoundPage: '_404.md',
+
 			homepage: 'guides/about.md',
-			// logo: 'media/lib-json.png',
+			logo: 'media/lib-json.png',
 			name: 'lib-json',
 		}
 	</script>
+
 	<script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+
 	<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+
+	<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+
+	<script src="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/index.min.js"></script>
+
 </body>
 
 </html>

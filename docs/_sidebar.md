@@ -1,12 +1,17 @@
 <!-- _sidebar.md -->
 
+<hr>
+
 - lib-json Docs
+	- [readme](guides/readme.md "lib-json")
 	- [About](guides/about.md "lib-json")
 	- [Field Traversal](guides/field-traversal.md)
 	- [Json Parse](guides/json-parse.md)
 	- [Json Stringify](guides/json-stringify.md)
 	- [Json Tablify](guides/json-tablify.md)
 	- [INI Text](guides/ini-text.md)
+
+<hr>
 
 - lib-json API
 	- [BuildObject ( Tokens )](api/BuildObject.md "lib-json.BuildObject()")
@@ -25,5 +30,8 @@
 	- [Tokenize ( Json )](api/Tokenize.md "lib-json.Tokenize()")
 	- [Traverse ( Root, Visitor )](api/Traverse.md "lib-json.Traverse()")
 
+<hr>
 
+- Information
 
+	- [Testing Output](testing-output.md)

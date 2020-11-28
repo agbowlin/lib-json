@@ -2,9 +2,13 @@
 
 ![logo](media/lib-json.png)
 
-# lib-json <small>0.1.0</small>
+# lib-json <small>(v0.1.2)</small>
+
+<hr>
 
 > A replacment for JavaScript's standard JSON functions, and more!
+
+<hr>
 
 - Simple and lightweight (~10kB)
 - 100% JavaScript - No dependencies
@@ -12,13 +16,12 @@
 - Powerful utility functions
 
 [GitHub](https://github.com/agbowlin/lib-json/)
-[Get Started](guides/about.md)
+[Get Started](guides/readme.md)
 
 
 <!-- background image -->
-
 <!-- ![]() -->
 
 <!-- background color -->
-
-![color](#cceeff)
+<!-- ![color](#cceeff) -->
+<!-- ![color](#2980B9) -->
