@@ -1,5 +1,5 @@
 /*
-# 910-release-version
+# 910-release-version (with colors)
 
 Finalizes a library project for release and establishes a new version.
 
@@ -16,8 +16,10 @@ Dependencies:
 
 ## Finalize Project for Release
 
-- Runs tests and store output in `docs/testing-output.md`: `npx mocha -u bdd tests/*.js --timeout 0 --slow 10`
 - Do webpack: `bash build/webpack/010-webpack.sh`
+- Runs tests and store output in `docs/testing-output.md`: `npx mocha -u bdd tests/*.js --timeout 0 --slow 10`
+- Copy 'docs/external/license.md' to project root.
+- Copy 'docs/external/readme.md' to project root.
 - Do final staging: `git add .`
 - Do final commit: `git commit -m "Finalization for vX.Y.Z"`
 - Do final push: `git push origin master`
@@ -32,7 +34,6 @@ Dependencies:
 - Search/Replace the old version number with the new version in source files:
 	- `package.json`
 	- `VERSION`
-	- `readme.md` (in format: `(vX.Y.Z)`)
 	- `docs/_coverpage.md` (in format: `(vX.Y.Z)`)
 	- `docs/guides/readme.md` (in format: `(vX.Y.Z)`)
 
@@ -47,19 +48,67 @@ Dependencies:
 const LIB_FS = require( 'fs' );
 const LIB_PATH = require( 'path' );
 const LIB_CHILD_PROCESS = require( 'child_process' );
+const LIB_SHELL_COLORS = require( './ShellColors.js' );
 
-const NPM = true;
-const S3_DOCS = true;
+const CONFIG = require( '../__secrets/product-config.js' ).Config;
 
+
+//---------------------------------------------------------------------
+function log_blank_line()
+{
+	console.log();
+	return;
+}
+
+//---------------------------------------------------------------------
+function log_heading( Text )
+{
+	Text = LIB_SHELL_COLORS.ShellText( Text, null, LIB_SHELL_COLORS.ShellForecolor.White, LIB_SHELL_COLORS.ShellEffect.Bold );
+	console.log( Text );
+	return;
+}
+
+//---------------------------------------------------------------------
+function log_muted( Text )
+{
+	Text = LIB_SHELL_COLORS.ShellText( Text, null, LIB_SHELL_COLORS.ShellForecolor.LightGray, LIB_SHELL_COLORS.ShellEffect.Dim );
+	console.log( Text );
+	return;
+}
+
+//---------------------------------------------------------------------
+function log_error( Text )
+{
+	Text = LIB_SHELL_COLORS.ShellText( Text, null, LIB_SHELL_COLORS.ShellForecolor.Red, LIB_SHELL_COLORS.ShellEffect.Bold );
+	console.log( Text );
+	return;
+}
 
 //---------------------------------------------------------------------
 function print_command_output( Command, Output )
 {
-	console.log( '------------------------------------------' );
-	console.log( `Command: ${Command}` );
-	console.log( `stdout: \n${Output.stdout}` );
-	console.log( `stderr: \n${Output.stderr}` );
-	console.log( '------------------------------------------' );
+	Command = LIB_SHELL_COLORS.ShellText( Command, null, LIB_SHELL_COLORS.ShellForecolor.White, LIB_SHELL_COLORS.ShellEffect.Bold );
+	log_muted( '+-----------------------------------------' );
+	log_heading( '| ' + Command );
+	if ( Output.stdout )
+	{
+		let text = Output.stderr.trim();
+		if ( text )
+		{
+			log_muted( `| stdout:` );
+			log_error( text );
+		}
+	}
+	if ( Output.stderr )
+	{
+		let text = Output.stderr.trim();
+		if ( text )
+		{
+			log_muted( `| stderr:` );
+			log_error( text );
+		}
+	}
+	log_muted( '+-----------------------------------------' );
 	return;
 }
 
@@ -108,29 +157,31 @@ function replace_text( Text, Search, Replace )
 //---------------------------------------------------------------------
 ( async function ()
 {
-	console.log( `[910-release-version] starting` );
-	console.log( `Running in: ${process.cwd()}` );
+	log_heading( `[910-release-version] starting` );
+	log_muted( `Running in: ${process.cwd()}` );
 
 	// - Loads the package.json file to obtain current version number.
 	let path = LIB_PATH.join( process.cwd(), 'package.json' );
 	let PACKAGE = require( path );
-	console.log( `Loaded package.json` );
-	console.log( `\tname = ${PACKAGE.name}` );
-	console.log( `\tversion = ${PACKAGE.version}` );
+	log_muted( `Loaded package.json` );
+	log_muted( `\tname = ${PACKAGE.name}` );
+	log_muted( `\tversion = ${PACKAGE.version}` );
 
 	//---------------------------------------------------------------------
 	//	Finalize Project for Release
 	//---------------------------------------------------------------------
 
 	// - Do webpack: `bash build/webpack/010-webpack.sh`
-	console.log( 'Do webpack' );
+	log_blank_line();
+	log_heading( 'Preflight: Do webpack' );
 	await execute_command( `bash build/webpack/010-webpack.sh` );
 
 	// - Runs tests and store output in docs/testing-output.md: `npx mocha -u bdd tests/*.js --timeout 0 --slow 10`
-	console.log( 'Runs tests and store output in docs/testing-output.md' );
+	log_blank_line();
+	log_heading( 'Preflight: Runs tests and store output in docs/external/testing-output.md' );
 	{
 		let result = await execute_command( `npx mocha -u bdd tests/*.js --timeout 0 --slow 10` );
-		path = LIB_PATH.join( process.cwd(), 'docs', 'testing-output.md' );
+		path = LIB_PATH.join( process.cwd(), 'docs', 'external', 'testing-output.md' );
 		LIB_FS.writeFileSync( path,
 			"# Testing Output\n\n\n"
 			+ "```\n"
@@ -139,37 +190,56 @@ function replace_text( Text, Search, Replace )
 		);
 	}
 
+	// - Copy 'docs/external/license.md' to project root.
+	log_blank_line();
+	log_heading( 'Preflight: Copy docs/external/license.md to project root' );
+	path = LIB_PATH.join( process.cwd(), 'docs', 'external', 'license.md' );
+	LIB_FS.copyFileSync( path, LIB_PATH.join( process.cwd(), 'license.md' ) );
+
+	// - Copy 'docs/external/readme.md' to project root.
+	log_blank_line();
+	log_heading( 'Preflight: Copy docs/external/license.md to project root' );
+	path = LIB_PATH.join( process.cwd(), 'docs', 'external', 'readme.md' );
+	LIB_FS.copyFileSync( path, LIB_PATH.join( process.cwd(), 'readme.md' ) );
+
 	// - Do final staging: `git add .`
-	console.log( 'Do final staging' );
+	log_blank_line();
+	log_heading( 'Do final staging before version tag' );
 	await execute_command( `git add .` );
 
 	// - Do final commit: `git commit -m "Finalization for vX.Y.Z"`
-	console.log( 'Do final commit' );
+	log_blank_line();
+	log_heading( 'Do final commit before version tag' );
 	await execute_command( `git commit -m "Finalization for v${PACKAGE.version}"` );
 
 	// - Do final push: `git push origin master`
-	console.log( 'Do final push' );
+	log_blank_line();
+	log_heading( 'Do final push before version tag' );
 	await execute_command( `git push origin master` );
 
 	// - Create git version tag: `git tag -a vX.Y.Z -m "Version vX.Y.Z"`
-	console.log( 'Create git version tag' );
+	log_blank_line();
+	log_heading( 'Create git version tag' );
 	await execute_command( `git tag -a v${PACKAGE.version} -m "Version ${PACKAGE.version}"` );
 
 	// - Push git version tag: `git push origin vX.Y.Z`
-	console.log( 'Push git version tag' );
+	log_blank_line();
+	log_heading( 'Push git version tag' );
 	await execute_command( `git push origin v${PACKAGE.version}` );
 
-	if ( NPM )
+	if ( CONFIG.HasNpmRegistry )
 	{
 		// - Create new npm version: `npm publish . --access public`
-		console.log( 'Create new npm version' );
+		log_blank_line();
+		log_heading( 'Create new npm version' );
 		await execute_command( `npm publish . --access public` );
 	}
 
-	if ( S3_DOCS )
+	if ( CONFIG.HasS3Docs )
 	{
 		// - Update S3 docs: `bash build/s3/810-s3-sync-docs.sh`
-		console.log( 'Update S3 docs' );
+		log_blank_line();
+		log_heading( 'Update S3 docs' );
 		await execute_command( `bash build/s3/810-s3-sync-docs.sh` );
 	}
 
@@ -184,34 +254,32 @@ function replace_text( Text, Search, Replace )
 		parts[ 2 ] = parseInt( parts[ 2 ] ) + 1;
 		PACKAGE.version = parts.join( '.' );
 	}
+	log_blank_line();
+	log_heading( `Created new version ${prev_version} -> ${PACKAGE.version}` );
 
 	// - Search/Replace the old version number with the new version in source files:
+	log_blank_line();
+	log_heading( 'Update version numbers in files' );
 	let doc = null;
 
 	// Update package.json
-	console.log( `Updating file: package.json` );
+	log_muted( `Updating file: package.json` );
 	path = LIB_PATH.join( process.cwd(), 'package.json' );
 	LIB_FS.writeFileSync( path, JSON.stringify( PACKAGE, null, '\t' ) );
 
 	// Update VERSION
-	console.log( `Updating file: VERSION` );
+	log_muted( `Updating file: VERSION` );
 	path = LIB_PATH.join( process.cwd(), 'VERSION' );
 	LIB_FS.writeFileSync( path, PACKAGE.version );
 
-	console.log( `Updating file: readme.md` );
-	path = LIB_PATH.join( process.cwd(), 'readme.md' );
-	doc = LIB_FS.readFileSync( path, 'utf-8' );
-	doc = replace_text( doc, `(v${prev_version})`, `(v${PACKAGE.version})` );
-	LIB_FS.writeFileSync( path, doc );
-
-	console.log( `Updating file: docs/_coverpage.md` );
+	log_muted( `Updating file: docs/_coverpage.md` );
 	path = LIB_PATH.join( process.cwd(), 'docs', '_coverpage.md' );
 	doc = LIB_FS.readFileSync( path, 'utf-8' );
 	doc = replace_text( doc, `(v${prev_version})`, `(v${PACKAGE.version})` );
 	LIB_FS.writeFileSync( path, doc );
 
-	console.log( `Updating file: docs/guides/readme.md` );
-	path = LIB_PATH.join( process.cwd(), 'docs', 'guides', 'readme.md' );
+	log_muted( `Updating file: docs/external/readme.md` );
+	path = LIB_PATH.join( process.cwd(), 'docs', 'external', 'readme.md' );
 	doc = LIB_FS.readFileSync( path, 'utf-8' );
 	doc = replace_text( doc, `(v${prev_version})`, `(v${PACKAGE.version})` );
 	LIB_FS.writeFileSync( path, doc );
@@ -221,18 +289,22 @@ function replace_text( Text, Search, Replace )
 	//---------------------------------------------------------------------
 
 	// - Do initial staging: `git add .`
-	console.log( 'Do initial staging' );
+	log_blank_line();
+	log_heading( 'Do initial staging for new version' );
 	await execute_command( `git add .` );
 
 	// - Do initial commit: `git commit -m "Initialization for vX.Y.Z"`
-	console.log( 'Do initial commit' );
+	log_blank_line();
+	log_heading( 'Do initial commit for new version' );
 	await execute_command( `git commit -m "Initialization for v${PACKAGE.version}"` );
 
 	// - Do final push: `git push origin master`
-	console.log( 'Do final push' );
+	log_blank_line();
+	log_heading( 'Do final push for new version' );
 	await execute_command( `git push origin master` );
 
 
-	console.log( `[910-release-version] finished` );
+	log_blank_line();
+	log_heading( `[910-release-version] finished` );
 	return;
 } )();

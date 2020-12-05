@@ -15,23 +15,22 @@
 			"homepage": "http://liquicode.com"
 		}
 	],
-	"main": "lib-json.js",
+	"main": "src/lib-json.js",
 	"files": [
 		"readme.md",
+		"license.md",
 		"VERSION",
-		"LICENSE",
-		"lib-json.js",
-		"src/*",
+		"dist/*",
 		"docs/*",
+		"src/*",
 		"tests/*"
 	],
 	"ignore": [
 		".*",
-		"*.dockerfile",
+		"~*",
 		"bower_components",
 		"node_modules",
-		"build",
-		"scratch"
+		"build"
 	],
 	"keywords": [
 		"javascript",

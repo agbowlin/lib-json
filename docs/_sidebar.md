@@ -3,8 +3,8 @@
 <hr>
 
 - lib-json Docs
-	- [readme](guides/readme.md "lib-json")
-	- [About](guides/about.md "lib-json")
+	- [About](external/readme.md "lib-json")
+	- [Overview](guides/lib-json.md "lib-json")
 	- [Field Traversal](guides/field-traversal.md)
 	- [Json Parse](guides/json-parse.md)
 	- [Json Stringify](guides/json-stringify.md)
@@ -13,7 +13,8 @@
 
 <hr>
 
-- lib-json API
+- Library API
+
 	- [BuildObject ( Tokens )](api/BuildObject.md "lib-json.BuildObject()")
 	- [CalculateTransform ( Node1, Node2 )](api/CalculateTransform.md "lib-json.CalculateTransform()")
 	- [Clone ( Node )](api/Clone.md "lib-json.Clone()")
@@ -34,4 +35,5 @@
 
 - Information
 
-	- [Testing Output](testing-output.md)
+	- [Testing Output](external/testing-output.md)
+	- [Software License](external/license.md)

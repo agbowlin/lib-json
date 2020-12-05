@@ -16,7 +16,7 @@
 - Powerful utility functions
 
 [GitHub](https://github.com/agbowlin/lib-json/)
-[Get Started](guides/readme.md)
+[Get Started](external/readme.md)
 
 
 <!-- background image -->
