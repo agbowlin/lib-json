@@ -66,7 +66,7 @@
       ✓ should not have path '$.foo'
 
 
-  41 passing (12ms)
+  41 passing (11ms)
 
 
 ```
