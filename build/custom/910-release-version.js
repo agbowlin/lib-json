@@ -17,9 +17,10 @@ Dependencies:
 ## Finalize Project for Release
 
 - Do webpack: `bash build/webpack/010-webpack.sh`
-- Runs tests and store output in `docs/testing-output.md`: `npx mocha -u bdd tests/*.js --timeout 0 --slow 10`
-- Copy 'docs/external/license.md' to project root.
-- Copy 'docs/external/readme.md' to project root.
+- Runs tests and store output in `docs/external/testing-output.md`: `npx mocha -u bdd tests/*.js --timeout 0 --slow 10`
+- Copy 'license.md' to 'docs/external'.
+- Copy 'readme.md' to 'docs/external'.
+- Copy 'VERSION' to 'docs/external'.
 - Do final staging: `git add .`
 - Do final commit: `git commit -m "Finalization for vX.Y.Z"`
 - Do final push: `git push origin master`
@@ -32,10 +33,10 @@ Dependencies:
 
 - Increments the minor portion of the version number (e.g. 0.0.1 -> 0.0.2).
 - Search/Replace the old version number with the new version in source files:
-	- `package.json`
-	- `VERSION`
-	- `docs/_coverpage.md` (in format: `(vX.Y.Z)`)
-	- `docs/guides/readme.md` (in format: `(vX.Y.Z)`)
+	- `package.json`        format `X.Y.Z`
+	- `VERSION`             format `X.Y.Z`
+	- `readme.md`           format `(vX.Y.Z)`
+	- `docs/_coverpage.md`  format `(vX.Y.Z)`
 
 ## Cleanup New Version
 
@@ -157,6 +158,8 @@ function replace_text( Text, Search, Replace )
 //---------------------------------------------------------------------
 ( async function ()
 {
+	let result = null;
+
 	log_heading( `[910-release-version] starting` );
 	log_muted( `Running in: ${process.cwd()}` );
 
@@ -167,20 +170,26 @@ function replace_text( Text, Search, Replace )
 	log_muted( `\tname = ${PACKAGE.name}` );
 	log_muted( `\tversion = ${PACKAGE.version}` );
 
-	//---------------------------------------------------------------------
-	//	Finalize Project for Release
-	//---------------------------------------------------------------------
+
+	//=====================================================================
+	//=====================================================================
+	//
+	//		Finalize Project for Release
+	//
+	//=====================================================================
+	//=====================================================================
+
 
 	// - Do webpack: `bash build/webpack/010-webpack.sh`
 	log_blank_line();
 	log_heading( 'Preflight: Do webpack' );
 	await execute_command( `bash build/webpack/010-webpack.sh` );
 
-	// - Runs tests and store output in docs/testing-output.md: `npx mocha -u bdd tests/*.js --timeout 0 --slow 10`
+	// - Runs tests and store output in docs/external/testing-output.md: `npx mocha -u bdd tests/*.js --timeout 0 --slow 10`
 	log_blank_line();
 	log_heading( 'Preflight: Runs tests and store output in docs/external/testing-output.md' );
 	{
-		let result = await execute_command( `npx mocha -u bdd tests/*.js --timeout 0 --slow 10` );
+		result = await execute_command( `npx mocha -u bdd tests/*.js --timeout 0 --slow 10` );
 		path = LIB_PATH.join( process.cwd(), 'docs', 'external', 'testing-output.md' );
 		LIB_FS.writeFileSync( path,
 			"# Testing Output\n\n\n"
@@ -190,27 +199,54 @@ function replace_text( Text, Search, Replace )
 		);
 	}
 
-	// - Copy 'docs/external/license.md' to project root.
-	log_blank_line();
-	log_heading( 'Preflight: Copy docs/external/license.md to project root' );
-	path = LIB_PATH.join( process.cwd(), 'docs', 'external', 'license.md' );
-	LIB_FS.copyFileSync( path, LIB_PATH.join( process.cwd(), 'license.md' ) );
+	// // - Copy 'docs/external/license.md' to project root.
+	// log_blank_line();
+	// log_heading( 'Preflight: Copy docs/external/license.md to project root' );
+	// path = LIB_PATH.join( process.cwd(), 'docs', 'external', 'license.md' );
+	// LIB_FS.copyFileSync( path, LIB_PATH.join( process.cwd(), 'license.md' ) );
 
-	// - Copy 'docs/external/readme.md' to project root.
+	// // - Copy 'docs/external/readme.md' to project root.
+	// log_blank_line();
+	// log_heading( 'Preflight: Copy docs/external/license.md to project root' );
+	// path = LIB_PATH.join( process.cwd(), 'docs', 'external', 'readme.md' );
+	// LIB_FS.copyFileSync( path, LIB_PATH.join( process.cwd(), 'readme.md' ) );
+
+	// - Copy 'license.md' to 'docs/external'.
 	log_blank_line();
-	log_heading( 'Preflight: Copy docs/external/license.md to project root' );
+	log_heading( 'Preflight: Copy license.md to docs/external' );
+	path = LIB_PATH.join( process.cwd(), 'docs', 'external', 'license.md' );
+	LIB_FS.copyFileSync( LIB_PATH.join( process.cwd(), 'license.md' ), path );
+
+	// - Copy 'readme.md' to 'docs/external'.
+	log_blank_line();
+	log_heading( 'Preflight: Copy readme.md to docs/external' );
 	path = LIB_PATH.join( process.cwd(), 'docs', 'external', 'readme.md' );
-	LIB_FS.copyFileSync( path, LIB_PATH.join( process.cwd(), 'readme.md' ) );
+	LIB_FS.copyFileSync( LIB_PATH.join( process.cwd(), 'readme.md' ), path );
+
+	// - Copy 'VERSION' to 'docs/external'.
+	log_blank_line();
+	log_heading( 'Preflight: Copy VERSION to docs/external' );
+	path = LIB_PATH.join( process.cwd(), 'docs', 'external', 'VERSION' );
+	LIB_FS.copyFileSync( LIB_PATH.join( process.cwd(), 'VERSION' ), path );
 
 	// - Do final staging: `git add .`
 	log_blank_line();
 	log_heading( 'Do final staging before version tag' );
 	await execute_command( `git add .` );
 
-	// - Do final commit: `git commit -m "Finalization for vX.Y.Z"`
+	// - Get project status
 	log_blank_line();
-	log_heading( 'Do final commit before version tag' );
-	await execute_command( `git commit -m "Finalization for v${PACKAGE.version}"` );
+	log_heading( 'Get project status' );
+	result = await execute_command( `git status` );
+	let working_tree_clean = result.stdout.includes( 'working tree clean' );
+
+	// - Do final commit: `git commit -m "Finalization for vX.Y.Z"`
+	if ( !working_tree_clean )
+	{
+		log_blank_line();
+		log_heading( 'Do final commit before version tag' );
+		await execute_command( `git commit -m "Finalization for v${PACKAGE.version}"` );
+	}
 
 	// - Do final push: `git push origin master`
 	log_blank_line();
@@ -243,9 +279,15 @@ function replace_text( Text, Search, Replace )
 		await execute_command( `bash build/s3/810-s3-sync-docs.sh` );
 	}
 
-	//---------------------------------------------------------------------
-	//	Establish a New Version
-	//---------------------------------------------------------------------
+
+	//=====================================================================
+	//=====================================================================
+	//
+	//		Establish a New Version
+	//
+	//=====================================================================
+	//=====================================================================
+
 
 	// - Increments the minor portion of the version number (e.g. 0.0.1 -> 0.0.2).
 	let prev_version = PACKAGE.version;
@@ -272,21 +314,31 @@ function replace_text( Text, Search, Replace )
 	path = LIB_PATH.join( process.cwd(), 'VERSION' );
 	LIB_FS.writeFileSync( path, PACKAGE.version );
 
+	// Update readme.md
+	log_muted( `Updating file: readme.md` );
+	path = LIB_PATH.join( process.cwd(), 'readme.md' );
+	doc = LIB_FS.readFileSync( path, 'utf-8' );
+	if ( !doc.includes( `(v${prev_version})` ) ) { console.error( `Unable to locate version number in file: readme.md` ); }
+	doc = replace_text( doc, `(v${prev_version})`, `(v${PACKAGE.version})` );
+	LIB_FS.writeFileSync( path, doc );
+
+	// Update docs/_coverpage.md
 	log_muted( `Updating file: docs/_coverpage.md` );
 	path = LIB_PATH.join( process.cwd(), 'docs', '_coverpage.md' );
 	doc = LIB_FS.readFileSync( path, 'utf-8' );
+	if ( !doc.includes( `(v${prev_version})` ) ) { console.error( `Unable to locate version number in file: docs/_coverpage.md` ); }
 	doc = replace_text( doc, `(v${prev_version})`, `(v${PACKAGE.version})` );
 	LIB_FS.writeFileSync( path, doc );
 
-	log_muted( `Updating file: docs/external/readme.md` );
-	path = LIB_PATH.join( process.cwd(), 'docs', 'external', 'readme.md' );
-	doc = LIB_FS.readFileSync( path, 'utf-8' );
-	doc = replace_text( doc, `(v${prev_version})`, `(v${PACKAGE.version})` );
-	LIB_FS.writeFileSync( path, doc );
 
-	//---------------------------------------------------------------------
-	//	Cleanup New Version
-	//---------------------------------------------------------------------
+	//=====================================================================
+	//=====================================================================
+	//
+	//		Cleanup New Version
+	//
+	//=====================================================================
+	//=====================================================================
+
 
 	// - Do initial staging: `git add .`
 	log_blank_line();
@@ -306,5 +358,6 @@ function replace_text( Text, Search, Replace )
 
 	log_blank_line();
 	log_heading( `[910-release-version] finished` );
+	log_heading( `Published version [${prev_version}], you are now at version [${PACKAGE.version}].` );
 	return;
 } )();
