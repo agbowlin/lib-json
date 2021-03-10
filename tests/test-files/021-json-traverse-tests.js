@@ -1,19 +1,20 @@
 "use strict";
 
 
-const LIB_JSON = require( '../src/lib-json.js' );
 const LIB_FS = require( 'fs' );
+const LIB_PATH = require( 'path' );
 const LIB_ASSERT = require( 'assert' );
 
+const LIB_JSON = require( LIB_PATH.resolve( __dirname, '../../src/lib-json.js' ) );
 
-let test_1_json = LIB_FS.readFileSync( __dirname + '/test_1.json' );
+let test_1_json = LIB_FS.readFileSync( LIB_PATH.resolve( __dirname, '../test-data/test_1.json' ), 'utf8' );
 let test_1_data = JSON.parse( test_1_json );
 
 let result = null;
 
 
 //---------------------------------------------------------------------
-describe( `Json Traverse`, function ()
+describe( `021) Json Traverse`, function ()
 {
 
 

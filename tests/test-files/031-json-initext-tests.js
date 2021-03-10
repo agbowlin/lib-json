@@ -1,12 +1,15 @@
 "use strict";
 
 
-const LIB_JSON = require( '../src/lib-json.js' );
+const LIB_FS = require( 'fs' );
+const LIB_PATH = require( 'path' );
 const LIB_ASSERT = require( 'assert' );
+
+const LIB_JSON = require( LIB_PATH.resolve( __dirname, '../../src/lib-json.js' ) );
 
 
 //---------------------------------------------------------------------
-describe( `Json IniText`, function ()
+describe( `031) Json IniText`, function ()
 {
 
 

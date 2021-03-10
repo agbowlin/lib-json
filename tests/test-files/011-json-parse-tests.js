@@ -1,8 +1,11 @@
 "use strict";
 
 
-const LIB_JSON = require( '../src/lib-json.js' );
+const LIB_FS = require( 'fs' );
+const LIB_PATH = require( 'path' );
 const LIB_ASSERT = require( 'assert' );
+
+const LIB_JSON = require( LIB_PATH.resolve( __dirname, '../../src/lib-json.js' ) );
 
 
 let result = null;
@@ -10,7 +13,7 @@ let result1 = null;
 
 
 //---------------------------------------------------------------------
-describe( `Json Parse`, function ()
+describe( `011) Json Parse`, function ()
 {
 
 

@@ -1,18 +1,20 @@
 "use strict";
 
 
-const LIB_JSON = require( '../src/lib-json.js' );
 const LIB_FS = require( 'fs' );
+const LIB_PATH = require( 'path' );
 const LIB_ASSERT = require( 'assert' );
 
-let test_1_json = LIB_FS.readFileSync( __dirname + '/test_1.json', 'utf8' );
+const LIB_JSON = require( LIB_PATH.resolve( __dirname, '../../src/lib-json.js' ) );
+
+let test_1_json = LIB_FS.readFileSync( LIB_PATH.resolve( __dirname, '../test-data/test_1.json' ), 'utf8' );
 let test_1_data = JSON.parse( test_1_json );
 
 let result = null;
 
 
 //---------------------------------------------------------------------
-describe( `Json Stringify`, function ()
+describe( `012) Json Stringify`, function ()
 {
 
 
@@ -120,39 +122,39 @@ describe( `Json Stringify`, function ()
 	} );
 
 
-/*
-	//---------------------------------------------------------------------
-	describe( `Speed tests`, function ()
-	{
-
-		it( `should stringify faster than Node's JSON`, function ()
+	/*
+		//---------------------------------------------------------------------
+		describe( `Speed tests`, function ()
 		{
-			let t0 = new Date();
-			let json = LIB_JSON.Stringify( test_small_data );
-			let duration1 = ( ( new Date() ) - t0 );
-
-			t0 = new Date();
-			json = JSON.stringify( test_small_data );
-			let duration2 = ( ( new Date() ) - t0 );
-
-			LIB_ASSERT.equal( duration1 < duration2, true, `lib-json: [${ duration1 } ms], node json: [${ duration2 } ms]` );
+	
+			it( `should stringify faster than Node's JSON`, function ()
+			{
+				let t0 = new Date();
+				let json = LIB_JSON.Stringify( test_small_data );
+				let duration1 = ( ( new Date() ) - t0 );
+	
+				t0 = new Date();
+				json = JSON.stringify( test_small_data );
+				let duration2 = ( ( new Date() ) - t0 );
+	
+				LIB_ASSERT.equal( duration1 < duration2, true, `lib-json: [${ duration1 } ms], node json: [${ duration2 } ms]` );
+			} );
+	
+			it( `should parse faster than Node's JSON`, function ()
+			{
+				let t0 = new Date();
+				let data = LIB_JSON.parse( test_small_json );
+				let duration1 = ( ( new Date() ) - t0 );
+	
+				t0 = new Date();
+				data = JSON.parse( test_small_json );
+				let duration2 = ( ( new Date() ) - t0 );
+	
+				LIB_ASSERT.equal( duration1 < duration2, true, `lib-json: [${ duration1 } ms], node json: [${ duration2 } ms]` );
+			} );
+	
 		} );
-
-		it( `should parse faster than Node's JSON`, function ()
-		{
-			let t0 = new Date();
-			let data = LIB_JSON.parse( test_small_json );
-			let duration1 = ( ( new Date() ) - t0 );
-
-			t0 = new Date();
-			data = JSON.parse( test_small_json );
-			let duration2 = ( ( new Date() ) - t0 );
-
-			LIB_ASSERT.equal( duration1 < duration2, true, `lib-json: [${ duration1 } ms], node json: [${ duration2 } ms]` );
-		} );
-
-	} );
-*/
+	*/
 
 
 } );

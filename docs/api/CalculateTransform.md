@@ -8,7 +8,7 @@ function CalculateTransform( Node1, Node2 )
 
 ### Description
 
-Calculates the operations required to be performed on one JavaScript so that it will be equal to another JavaScript object.
+Calculates the operations required to be performed on one JavaScript object so that it will be equal to another JavaScript object.
 
 
 ### Parameters
