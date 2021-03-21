@@ -4,18 +4,14 @@
 ```
 
 
-  Json IniText
-    ✓ should handle simple cases
-    ✓ should ignore invalid sections and entries
-
-  Json Parse
+  011) Json Parse
     Equivalence with Javascript's JSON.parse()
       ✓ should parse empty object "{}"
       ✓ should parse empty array "[]"
       ✓ should parse "true"
       ✓ should parse "3.14"
 
-  Json Stringify
+  012) Json Stringify
     Stringify Primitives
       ✓ should stringify null [null]
       ✓ should stringify empty string [""]
@@ -34,11 +30,7 @@
       ✓ should stringify ["Hello World!"] the same way
       ✓ should stringify test_1.json the same way
 
-  Json Tablify
-    Tablify Tests
-      ✓ should tablify test data
-
-  Json Transform
+  013) Json Transform
     Calculate Transforms
       ✓ should return an empty transform for equal text values
       ✓ should return a single value mismatch for non-equal text values
@@ -48,7 +40,7 @@
       ✓ should detect differences within an array
       ✓ should detect differences within an object
 
-  Json Traverse
+  021) Json Traverse
     traverse
       ✓ should return [1], the value of 'one'
       ✓ should return [2], the value of 'two'
@@ -65,8 +57,22 @@
       ✓ should have path '$.five.six.seven'
       ✓ should not have path '$.foo'
 
+  031) Json IniText
+    ✓ should handle simple cases
+    ✓ should ignore invalid sections and entries
 
-  41 passing (11ms)
+  032) Json Tablify
+    Tablify Tests
+      ✓ should tablify a simple array of numbers
+      ✓ should tablify a simple number value
+      ✓ should tablify a simple string value
+      ✓ should tablify a simple object
+      ✓ should tablify a simple array of strings
+      ✓ should tablify a simple array of objects
+      ✓ should tablify test data
+
+
+  47 passing (13ms)
 
 
 ```

@@ -189,7 +189,7 @@ function replace_text( Text, Search, Replace )
 	log_blank_line();
 	log_heading( 'Preflight: Runs tests and store output in docs/external/testing-output.md' );
 	{
-		result = await execute_command( `npx mocha -u bdd tests/*.js --timeout 0 --slow 10` );
+		result = await execute_command( `npx mocha -u bdd tests/test-files/*.js --timeout 0 --slow 10` );
 		path = LIB_PATH.join( process.cwd(), 'docs', 'external', 'testing-output.md' );
 		LIB_FS.writeFileSync( path,
 			"# Testing Output\n\n\n"
