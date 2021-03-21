@@ -24,38 +24,38 @@ describe( `012) Json Stringify`, function ()
 		it( `should stringify null [null]`, function ()
 		{
 			result = LIB_JSON.Stringify( null );
-			LIB_ASSERT.equal( result, 'null' );
+			LIB_ASSERT.strictEqual( result, 'null' );
 		} );
 		it( `should stringify empty string [""]`, function ()
 		{
 			result = LIB_JSON.Stringify( "" );
-			LIB_ASSERT.equal( result, '""' );
+			LIB_ASSERT.strictEqual( result, '""' );
 		} );
 		it( `should stringify empty array [[]]`, function ()
 		{
 			result = LIB_JSON.Stringify( [] );
-			LIB_ASSERT.equal( result, '[]' );
+			LIB_ASSERT.strictEqual( result, '[]' );
 		} );
 		it( `should stringify empty object [{}]`, function ()
 		{
 			result = LIB_JSON.Stringify( {} );
-			LIB_ASSERT.equal( result, '{}' );
+			LIB_ASSERT.strictEqual( result, '{}' );
 		} );
 		it( `should stringify [true]`, function ()
 		{
 			result = LIB_JSON.Stringify( true );
-			LIB_ASSERT.equal( result, 'true' );
+			LIB_ASSERT.strictEqual( result, 'true' );
 		} );
 		it( `should stringify [3.14]`, function ()
 		{
 			result = LIB_JSON.Stringify( 3.14 );
-			LIB_ASSERT.equal( result, '3.14' );
+			LIB_ASSERT.strictEqual( result, '3.14' );
 		} );
 		it( `should stringify ["Hello World!"]`, function ()
 		{
 			result = JSON.stringify( "Hello World!" );
 			result = LIB_JSON.Stringify( "Hello World!" );
-			LIB_ASSERT.equal( result, `"Hello World!"` );
+			LIB_ASSERT.strictEqual( result, `"Hello World!"` );
 		} );
 	} );
 
@@ -65,59 +65,58 @@ describe( `012) Json Stringify`, function ()
 	{
 		it( `should stringify null [null] the same way`, function ()
 		{
-			LIB_ASSERT.equal(
+			LIB_ASSERT.strictEqual(
 				LIB_JSON.Stringify( null ),
 				JSON.stringify( null )
 			);
 		} );
 		it( `should stringify empty string [""] the same way`, function ()
 		{
-			LIB_ASSERT.equal(
+			LIB_ASSERT.strictEqual(
 				LIB_JSON.Stringify( "" ),
 				JSON.stringify( "" )
 			);
 		} );
 		it( `should stringify empty array [[]] the same way`, function ()
 		{
-			LIB_ASSERT.equal(
+			LIB_ASSERT.strictEqual(
 				LIB_JSON.Stringify( [] ),
 				JSON.stringify( [] )
 			);
 		} );
 		it( `should stringify empty object [{}] the same way`, function ()
 		{
-			LIB_ASSERT.equal(
+			LIB_ASSERT.strictEqual(
 				LIB_JSON.Stringify( {} ),
 				JSON.stringify( {} )
 			);
 		} );
 		it( `should stringify [true] the same way`, function ()
 		{
-			LIB_ASSERT.equal(
+			LIB_ASSERT.strictEqual(
 				LIB_JSON.Stringify( true ),
 				JSON.stringify( true )
 			);
 		} );
 		it( `should stringify [3.14] the same way`, function ()
 		{
-			LIB_ASSERT.equal(
+			LIB_ASSERT.strictEqual(
 				LIB_JSON.Stringify( 3.14 ),
 				JSON.stringify( 3.14 )
 			);
 		} );
 		it( `should stringify ["Hello World!"] the same way`, function ()
 		{
-			LIB_ASSERT.equal(
+			LIB_ASSERT.strictEqual(
 				LIB_JSON.Stringify( "Hello World!" ),
 				JSON.stringify( "Hello World!" )
 			);
 		} );
 		it( `should stringify test_1.json the same way`, function ()
 		{
-			LIB_ASSERT.equal(
-				LIB_JSON.Stringify( test_1_data ),
-				JSON.stringify( test_1_data )
-			);
+			let v1 = LIB_JSON.Stringify( test_1_data );
+			let v2 = JSON.stringify( test_1_data );
+			LIB_ASSERT.strictEqual( v1, v2 );
 		} );
 	} );
 
@@ -137,7 +136,7 @@ describe( `012) Json Stringify`, function ()
 				json = JSON.stringify( test_small_data );
 				let duration2 = ( ( new Date() ) - t0 );
 	
-				LIB_ASSERT.equal( duration1 < duration2, true, `lib-json: [${ duration1 } ms], node json: [${ duration2 } ms]` );
+				LIB_ASSERT.strictEqual( duration1 < duration2, true, `lib-json: [${ duration1 } ms], node json: [${ duration2 } ms]` );
 			} );
 	
 			it( `should parse faster than Node's JSON`, function ()
@@ -150,7 +149,7 @@ describe( `012) Json Stringify`, function ()
 				data = JSON.parse( test_small_json );
 				let duration2 = ( ( new Date() ) - t0 );
 	
-				LIB_ASSERT.equal( duration1 < duration2, true, `lib-json: [${ duration1 } ms], node json: [${ duration2 } ms]` );
+				LIB_ASSERT.strictEqual( duration1 < duration2, true, `lib-json: [${ duration1 } ms], node json: [${ duration2 } ms]` );
 			} );
 	
 		} );

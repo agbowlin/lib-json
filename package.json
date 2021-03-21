@@ -62,7 +62,7 @@
 		"webpack-node-externals": "^2.5.2"
 	},
 	"scripts": {
-		"run-tests": "mocha -u bdd tests/*.js --timeout 0 --slow 10 --colors",
+		"run-tests": "mocha -u bdd tests/test-files/*.js --timeout 0 --slow 10 --colors",
 		"run-docs-web-server": "npx here --directory docs --port 4200 --watch 1 --silent",
 		"010-webpack": "bash build/webpack/010-webpack.sh",
 		"810-s3-sync-docs": "bash build/s3/810-s3-sync-docs.sh",

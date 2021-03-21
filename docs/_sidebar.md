@@ -2,13 +2,17 @@
 
 <hr>
 
-- lib-json Docs
+- lib-json
 	- [About](external/readme.md "lib-json")
 	- [Overview](guides/lib-json.md "lib-json")
-	- [Field Traversal](guides/field-traversal.md)
+
+<hr>
+
+- Guides
 	- [Json Parse](guides/json-parse.md)
 	- [Json Stringify](guides/json-stringify.md)
 	- [Json Tablify](guides/json-tablify.md)
+	- [Field Traversal](guides/field-traversal.md)
 	- [INI Text](guides/ini-text.md)
 
 <hr>

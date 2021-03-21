@@ -17,7 +17,7 @@ exports.Traverse = json_traverse.Traverse;
 
 //---------------------------------------------------------------------
 exports.HasPath =
-	function HasPath ( Root, Path )
+	function HasPath( Root, Path )
 	{
 		return json_traverse.Traverse( Root, info => 
 		{
@@ -28,7 +28,7 @@ exports.HasPath =
 
 //---------------------------------------------------------------------
 exports.FindName =
-	function FindName ( Root, Name )
+	function FindName( Root, Name )
 	{
 		return json_traverse.Traverse( Root, info => { if ( info.name === Name ) { return info.path; } } );
 	};
@@ -36,7 +36,7 @@ exports.FindName =
 
 //---------------------------------------------------------------------
 exports.FindValue =
-	function FindValue ( Root, Value )
+	function FindValue( Root, Value )
 	{
 		return json_traverse.Traverse( Root, info => { if ( info.value === Value ) { return info.path; } } );
 	};
@@ -44,7 +44,7 @@ exports.FindValue =
 
 //---------------------------------------------------------------------
 exports.GetValue =
-	function GetValue ( Root, Path )
+	function GetValue( Root, Path )
 	{
 		return json_traverse.Traverse( Root, info => { if ( info.path === Path ) { return info.value; } } );
 	};
@@ -52,7 +52,7 @@ exports.GetValue =
 
 //---------------------------------------------------------------------
 exports.SetValue =
-	function SetValue ( Root, Path, Value )
+	function SetValue( Root, Path, Value )
 	{
 		return json_traverse.Traverse( Root, info =>
 		{
@@ -77,6 +77,7 @@ exports.SetValue =
 //---------------------------------------------------------------------
 const json_stringify = require( './json-stringify.js' );
 exports.Stringify = json_stringify.Stringify;
+exports.stringify = json_stringify.Stringify;
 
 //---------------------------------------------------------------------
 const json_stringify_options = require( './json-stringify-options.js' );
@@ -97,6 +98,7 @@ exports.StringifyOptionsVeryPretty = json_stringify_options.StringifyOptionsVery
 //---------------------------------------------------------------------
 const json_tablify = require( './json-tablify.js' );
 exports.Tablify = json_tablify.Tablify;
+exports.tablify = json_tablify.Tablify;
 
 
 //=====================================================================
@@ -126,6 +128,7 @@ exports.FromIniText = json_initext.FromIniText;
 //---------------------------------------------------------------------
 const json_parse = require( './json-parse.js' );
 exports.Parse = json_parse.Parse;
+exports.parse = json_parse.Parse;
 exports.Tokenize = json_parse.Tokenize;
 exports.BuildObject = json_parse.BuildObject;
 
@@ -134,14 +137,15 @@ exports.BuildObject = json_parse.BuildObject;
 /**
  * Performs a deep copy of an object.
  */
-exports.Clone =
-	function Clone ( Node )
-	{
-		let json = json_stringify.Stringify( Node );
-		let tokens = json_parse.Tokenize( json );
-		let clone = json_parse.BuildObject( tokens );
-		return clone;
-	};
+function Clone( Node )
+{
+	let json = json_stringify.Stringify( Node );
+	let tokens = json_parse.Tokenize( json );
+	let clone = json_parse.BuildObject( tokens );
+	return clone;
+};
+exports.Clone = Clone;
+exports.clone = Clone;
 
 
 //=====================================================================

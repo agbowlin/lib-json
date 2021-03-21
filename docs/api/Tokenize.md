@@ -38,4 +38,4 @@ Returns an array `Token` objects.
 - `string`: A single `'` or double `"` quoted string.
 	The token will be the entire string.
 - `literal`: Any other type of text found in the source string.
-	The token will be a field name or a primitive value (numeric or boolean).
+	The token will be an identifier (field name) or a primitive value (numeric or boolean).
