@@ -1,5 +1,5 @@
 
-# lib-json (v0.1.5)
+# lib-json (v0.1.6)
 
 ## Overview
 
