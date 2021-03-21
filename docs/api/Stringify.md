@@ -4,6 +4,7 @@
 
 ```js
 function Stringify( Node, StringifyOptions )
+function stringify( Node, StringifyOptions )
 ```
 
 ### Description

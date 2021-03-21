@@ -4,6 +4,7 @@
 
 ```js
 function Tablify( Node, TablifyOptions )
+function tablify( Node, TablifyOptions )
 ```
 
 ### Description

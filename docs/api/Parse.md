@@ -4,6 +4,7 @@
 
 ```js
 function Parse ( Json )
+function parse ( Json )
 ```
 
 ### Description
