@@ -4,7 +4,7 @@
 
 `lib-json.Parse()` emulates Javasciprt's `JSON.parse()` function which loads a Javascript object from a text string.
 
-`lib-json.Parse()` differs from `JSON.parse()` in that it provides a more relaxed parsing of JSON strings. This is more in line with Javascipt's object syntax (as opposed to JSON's syntax).
+`lib-json.Parse()` differs from `JSON.parse()` in that it provides a more relaxed parsing of JSON strings which is more in line with Javascipt's object syntax (as opposed to JSON's syntax).
 
 Consider the following JSON string:
 

@@ -3,12 +3,15 @@
 
 ### General
 
-- (COMPLETED) Export top level functions in PascalCase.
-- Handle comments in json.
+- ***COMPLETED*** Export top level functions in PascalCase.
 - Combine with hiernodejs to provide node navigation?
-- Convert to/from BSON
-- Convert to/from YAML
+- Convert to/from [BSON](https://bsonspec.org/)
+- Convert to/from [YAML](https://yaml.org/)
+- Convert to/from [HJSON](https://hjson.github.io/)
+- Handle comments in json.
+	- Like HJSON but maintain the comments.
 - Make lib-json-cli.js
+	- Command line utility to perform conversions
 
 
 ### Stringify
@@ -27,7 +30,7 @@
 ### Parse
 
 - Processing time for `parse` is slow
-- Option to stop parsing when indent count reaches 0. Allows parsing of embedded json.
+- Option to stop parsing when indent count reaches 0 to Allow parsing of embedded json.
 
 
 ### Transform

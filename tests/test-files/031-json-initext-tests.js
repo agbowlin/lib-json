@@ -35,10 +35,10 @@ describe( `031) Json IniText`, function ()
 	{
 		let data1 =
 		{
-			InvalidSection1: 'foo',
-			InvalidSection2: [ 1, 2, 3 ],
 			Section1: { Entry1: 'one', Entry2: 2 },
-			Section2: { Entry1: 1, Entry2: true, Entry3: { foo: 'bar' } },
+			Section2: { Entry1: 1, Entry2: true, Entry3: { foo: 'bar' } }, // Invalid Entry: Entries must be primitive types.
+			InvalidSection1: 'foo',			// Invalid Section: An INI section must be represented by an object.
+			InvalidSection2: [ 1, 2, 3 ],	// Invalid Section: An INI section must be represented by an object.
 		};
 		let text = LIB_JSON.ToIniText( data1 );
 		let data2 = LIB_JSON.FromIniText( text );
