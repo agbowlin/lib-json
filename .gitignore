@@ -15,6 +15,5 @@ npm-debug.log
 .DS_STORE
 .netbeans
 nbproject
-scratch
 .build-env
 build/__secrets
