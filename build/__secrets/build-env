@@ -1,0 +1,5 @@
+export IMAGE_NAME=lib-json.liquicode.com
+# export REPO_URL='803447307749.dkr.ecr.us-east-1.amazonaws.com'
+export REPO_URL='registry.hub.docker.com/agbowlin'
+export AWS_PROFILE='admin'
+export AWS_BUCKET=lib-json.liquicode.com
